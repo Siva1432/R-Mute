@@ -1,0 +1,29 @@
+{
+  "name": "rmute",
+  "version": "1.0.0",
+  "description": "Real Time multi user Text Editor for realtime collaboration.",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Siva1432/rmute.git"
+  },
+  "author": "siva sai",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Siva1432/rmute/issues"
+  },
+  "homepage": "https://github.com/Siva1432/rmute#readme",
+  "dependencies": {
+    "@angular/cli": "^7.3.7",
+    "@types/socket.io-client": "^1.4.32",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.4.20",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0"
+  }
+}
