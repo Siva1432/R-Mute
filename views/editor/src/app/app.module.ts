@@ -6,14 +6,15 @@ import { SocketService } from './services/socket.service';
 import { TextService } from './services/text.service';
 import { OperationHelpersService } from './services/operation-helpers.service';
 import {FormsModule} from '@angular/forms';
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
   BrowserModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [SocketService,TextService,OperationHelpersService],
   bootstrap: [AppComponent]

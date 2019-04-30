@@ -1,5 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import * as io from 'socket.io-client';
+import { HttpClient } from '@angular/common/http';
 import { Observable, Subject, Observer, BehaviorSubject } from 'rxjs';
 import { text } from '@angular/core/src/render3';
 
@@ -15,8 +16,9 @@ export class SocketService {
  
   socket:any;
   isUpdate:any;
-  constructor() {
-    this.socket= io.connect('http://localhost:4500/editor');
+  constructor(private http:HttpClient) {
+    
+    this.socket= io.connect('https://rmute.herokuapp.com/editor');
     this.socket.on('connection' , ()=>{
       console.log('io connection established',this.socket.nsp);
     });    
