@@ -8,7 +8,7 @@ const userRouter = require('./users.router')(io,app);
 app.use(express.static(`./views/editor/dist/editor`));
 app.use('/',bp.json());
 app.use('/',bp.urlencoded({extended:true}));
-app.use('/editor',userRouter);
+app.use('/',userRouter);
 //app.use(express.static('./views/editor/dist/editor'));
 // io.of('/editor')
 // .on('connection',(socket)=>{
