@@ -162,6 +162,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_text_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./services/text.service */ "./src/app/services/text.service.ts");
 /* harmony import */ var _services_operation_helpers_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./services/operation-helpers.service */ "./src/app/services/operation-helpers.service.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+
 
 
 
@@ -180,7 +182,8 @@ var AppModule = /** @class */ (function () {
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormsModule"]
+                _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormsModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClientModule"]
             ],
             providers: [_services_socket_service__WEBPACK_IMPORTED_MODULE_4__["SocketService"], _services_text_service__WEBPACK_IMPORTED_MODULE_5__["TextService"], _services_operation_helpers_service__WEBPACK_IMPORTED_MODULE_6__["OperationHelpersService"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
@@ -237,16 +240,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/lib/index.js");
 /* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(socket_io_client__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+
 
 
 
 
 var SocketService = /** @class */ (function () {
-    function SocketService() {
+    function SocketService(http) {
         var _this = this;
-        this.getServerText = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
-        this.observeServerText = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"](function (Observer) {
+        this.http = http;
+        this.getServerText = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();
+        this.observeServerText = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Observable"](function (Observer) {
             _this.socket.on('getText', function (val) {
                 console.log("got text properties from server :", val);
                 _this.getServerText.next(val);
@@ -254,19 +260,19 @@ var SocketService = /** @class */ (function () {
                 Observer.complete();
             });
         });
-        this.newOp = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"](function (Observer) {
+        this.newOp = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Observable"](function (Observer) {
             _this.socket.on("newOp", function (op) {
                 Observer.next(op);
                 //  console.log(`got new Op:`,op);
             });
         });
-        this.deleteValListner = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"](function (Observer) {
+        this.deleteValListner = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Observable"](function (Observer) {
             _this.socket.on("deleteVal", function (id) {
                 Observer.next(id);
                 console.log("got delete value at index::" + id);
             });
         });
-        this.getUserParams = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"](function (Observer) {
+        this.getUserParams = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Observable"](function (Observer) {
             _this.socket.on('getUserParams', function (data) {
                 Observer.next(data);
                 Observer.complete();
@@ -284,7 +290,7 @@ var SocketService = /** @class */ (function () {
         this.getText = function () {
             this.socket.emit('getText');
         };
-        this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__["connect"]('http://localhost:4500/editor');
+        this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__["connect"]('https://rmute.herokuapp.com/editor');
         this.socket.on('connection', function () {
             console.log('io connection established', _this.socket.nsp);
         });
@@ -293,7 +299,7 @@ var SocketService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
             providedIn: 'root'
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"]])
     ], SocketService);
     return SocketService;
 }());
