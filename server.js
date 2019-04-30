@@ -15,6 +15,8 @@ app.use('/',userRouter);
 //     console.log('new connection established');
 // });
 
-server.listen(4500,()=>{
-    console.log('server listening on port 4500');
+let port= process.env.PORT;
+
+server.listen(port||4500,()=>{
+    console.log(`server listening on port ${port || 4500}`);
 });
