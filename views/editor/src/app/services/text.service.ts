@@ -12,8 +12,8 @@ export class TextService {
   constructor(private socketService:SocketService) {
     
     this.socketService.getUserParams.subscribe((val)=>{
-      //console.log(`got the UserParams :`,val);
       this.userParams= val;
+      console.log(`got the UserParams :`,this.userParams);
     });
 
     this.socketService.getServerText

@@ -444,8 +444,8 @@ var TextService = /** @class */ (function () {
             }
         });
         this.socketService.getUserParams.subscribe(function (val) {
-            //console.log(`got the UserParams :`,val);
             _this.userParams = val;
+            console.log("got the UserParams :", _this.userParams);
         });
         this.socketService.getServerText
             .subscribe(function (value) {
