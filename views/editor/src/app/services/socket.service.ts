@@ -1,7 +1,8 @@
 import { Injectable, OnInit } from '@angular/core';
 import * as io from 'socket.io-client';
-import { Observable,Observer,Subject,fromEvent } from 'rxjs';
+import { Observable, Subject, Observer, BehaviorSubject } from 'rxjs';
 import { text } from '@angular/core/src/render3';
+
 
 
 
@@ -11,6 +12,7 @@ import { text } from '@angular/core/src/render3';
   providedIn: 'root'
 })
 export class SocketService {
+ 
   socket:any;
   isUpdate:any;
   constructor() {
@@ -19,20 +21,51 @@ export class SocketService {
       console.log('io connection established',this.socket.nsp);
     });    
    }
-   createTextStream = new Observable((obs)=>{
-     this.socket.on('getText',(text)=>{
-     //  console.log("calling text in next ");
-       obs.next(text);
+   getServerText = new Subject<{text:string,idString:string}>();
+   
+   
+   observeServerText= new Observable((Observer)=>{
+     this.socket.on('getText',(val:{text:string,idString:string})=>{
+       console.log("got text properties from server :",val);
+       this.getServerText.next(val);
+       this.getServerText.complete();
+       Observer.complete();
      })
    });
    
-  
-  updateText = function(text){
-      this.socket.emit('updateText', text );  
-  }
 
+   newOp= new Observable<any>((Observer)=>{
+     this.socket.on(`newOp`,(op)=>{
+       Observer.next(op);
+     //  console.log(`got new Op:`,op);
+     });
+   });
+   deleteValListner=new Observable<string>((Observer)=>{
+     this.socket.on(`deleteVal`,(id:string)=>{
+       Observer.next(id);
+       console.log(`got delete value at index::${ id}`);
+     });
+   }
+   );
+   
+   getUserParams:Observable<any> = new Observable((Observer)=>{
+    this.socket.on('getUserParams',function(data:{}){
+      Observer.next(data);
+      Observer.complete();
+    })
+   });
+   
+   deleteVal=function(nextTo:string):void{
+    this.socket.emit(`deleteVal`,nextTo);
+   };
+   emitNewOp = function(op){
+      this.socket.emit('newOperation', op );  
+  }
+  emitgetUserParams=function(){
+    this.socket.emit('getUserParams');
+  };
   getText=function(){
     this.socket.emit('getText');
-  }
+  };
    
 }

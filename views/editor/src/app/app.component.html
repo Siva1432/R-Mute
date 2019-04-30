@@ -1,6 +1,6 @@
 <div>
   <h1>Welcome to the realtime online multiuser editor</h1>
-  <textarea [(ngModel)] = "text" (keyup)="updateText()"></textarea>
+  <textarea #editor [(ngModel)] = "text" (keydown)="deleteVal($event,editor)" (keypress)="updateText($event,editor)"></textarea>
 
 </div>
 
