@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Siva1432/rmute.git"
+    "url": ""
   },
   "author": "siva sai",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Siva1432/rmute/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/Siva1432/rmute#readme",
+  "homepage": "",
   "dependencies": {
     "@angular/cli": "^7.3.7",
     "@types/socket.io-client": "^1.4.32",
