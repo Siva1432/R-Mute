@@ -48,11 +48,29 @@ export class TextService {
     if(id==NaN || id==undefined){
       id=op.c+op.id
     }
+    let newNextTo:any;
+    let idArry:string[]=this.idString.split(`,`);
+    for(let i=idArry.indexOf(op.nextTo)+1; i<this.idString.length ;i++){
+      if(op.c+op.id>idArry[i]){
+        newNextTo=idArry[i];
+        break;
+      }
+    };
+
+    if(newNextTo==undefined){
+      switch(this.idString.length){
+        case 0:
+        newNextTo=0;
+        break;
+        default:
+        newNextTo = idArry[idArry.length-1];
+      }
+    }
    // console.log(`apending id :${id}`);
-    let nextIndex= this.idString.indexOf(op.nextTo);
+    let nextIndex= this.idString.indexOf(newNextTo);
     let n:number=op.nextTo.length
     //console.log( `nextTo:${op.nextTo}    next index: ${nextIndex}  `);
-    switch(op.nextTo){
+    switch(newNextTo){
       case undefined:
      // console.log(`cant add undefined to Idstring`);
       break;
@@ -69,9 +87,11 @@ export class TextService {
   
   newOpeartion=this.socketService.newOp.subscribe((op)=>{
     //console.log(`local counter:${this.userParams.counter} , Op counter:${op.c}`);
+    let index:number;
+    
+
     (this.userParams.counter<op.c)?this.userParams.counter=op.c:console.log(`got op coutner less then local`);
     this.addId(op);
-    let index=this.idString.split(`,`).indexOf(op.nextTo);
     //console.log(`newOp Received val at index:`,index,op,this.idString);
     if(index>=-1){
     const concat={val:op.val,index:index+1,key:'i'}

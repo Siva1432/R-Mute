@@ -14,24 +14,60 @@ module.exports={
         }:console.log(`got next to undefined in addFnToBackUp`);
     },
 
-    stringOperations:function(fn,stateProperties){
-            let id=fn.c+fn.id;
-            stateProperties.id=id;
-            this.addFnToBackup(fn);          
+    stringOperations:function(op,stateProperties){
+            let id=op.c+op.id;
 
-            if(fn.nextTo==undefined){
-                console.log(`got next to undefined returning the value to the client `);
-            }else if(fn.nextTo==0){
-                (stateProperties.idString.length>1)? stateProperties.idString=`${id},${stateProperties.idString}` :stateProperties.idString=`${id}`;
-            }
-            else{
-                let nextIndex=this.findIndex(fn.nextTo,stateProperties.idString);
-                    let n=fn.nextTo.length;
-                     console.log(`index :${nextIndex}`);
-                      if(nextIndex>=0){
-                    stateProperties.idString= `${stateProperties.idString.slice(0,nextIndex+n)},${id}${stateProperties.idString.slice(nextIndex+n)}`;
-                                    }
-                                }
+
+            this.addFnToBackup(fn);         
+            let idArry=stateProperties.idString.split(`,`);
+            let newNextTo;
+    for(let i=idArry.indexOf(op.nextTo)+1; i<stateProperties.idString.length ;i++){
+      if(id>idArry[i]){
+        newNextTo=idArry[i];
+        break;
+      }
+    };
+
+    if(newNextTo==undefined){
+      switch(stateProperties.idString.length){
+        case 0:
+        newNextTo=0;
+        break;
+        default:
+        newNextTo = idArry[idArry.length-1];
+      }
+    }
+   // console.log(`apending id :${id}`);
+    let nextIndex= stateProperties.idString.indexOf(newNextTo);
+    let n=op.nextTo.length;
+    //console.log( `nextTo:${op.nextTo}    next index: ${nextIndex}  `);
+    switch(newNextTo){
+      case undefined:
+     // console.log(`cant add undefined to Idstring`);
+      break;
+      case 0:
+      (stateProperties.idString.length>=1)? stateProperties.idString=`${id},`+stateProperties.idString :stateProperties.idString=`${id}`;
+      break;
+      default:
+              if(nextIndex>=0){
+                stateProperties.idString= `${stateProperties.idString.slice(0,nextIndex+n)},${id}${stateProperties.idString.slice(nextIndex+n)}`;
+              }
+
+    } 
+
+            // if(fn.nextTo==undefined){
+            //     console.log(`got next to undefined returning the value to the client `);
+            // }else if(fn.nextTo==0){
+            //     (stateProperties.idString.length>1)? stateProperties.idString=`${id},${stateProperties.idString}` :stateProperties.idString=`${id}`;
+            // }
+            // else{
+            //     let nextIndex=this.findIndex(fn.nextTo,stateProperties.idString);
+            //         let n=fn.nextTo.length;
+            //          console.log(`index :${nextIndex}`);
+            //           if(nextIndex>=0){
+            //         stateProperties.idString= `${stateProperties.idString.slice(0,nextIndex+n)},${id}${stateProperties.idString.slice(nextIndex+n)}`;
+            //                         }
+            //                     }
           let valIndex=this.findValId(stateProperties.idString,id);
           switch(valIndex){
               case 0:
