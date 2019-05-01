@@ -161,6 +161,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_socket_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./services/socket.service */ "./src/app/services/socket.service.ts");
 /* harmony import */ var _services_text_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./services/text.service */ "./src/app/services/text.service.ts");
 /* harmony import */ var _services_operation_helpers_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./services/operation-helpers.service */ "./src/app/services/operation-helpers.service.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 
 
 
@@ -168,7 +169,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-//import {FormsModule} from '@angular/forms';
+
 //import { HttpClientModule } from '@angular/common/http';
 var AppModule = /** @class */ (function () {
     function AppModule() {
@@ -180,6 +181,7 @@ var AppModule = /** @class */ (function () {
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormsModule"],
             ],
             providers: [_services_socket_service__WEBPACK_IMPORTED_MODULE_4__["SocketService"], _services_text_service__WEBPACK_IMPORTED_MODULE_5__["TextService"], _services_operation_helpers_service__WEBPACK_IMPORTED_MODULE_6__["OperationHelpersService"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
