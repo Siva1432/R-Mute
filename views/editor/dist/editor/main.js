@@ -285,7 +285,7 @@ var SocketService = /** @class */ (function () {
         this.getText = function () {
             this.socket.emit('getText');
         };
-        var url = { local: "http://localhost:4500/editor", heroku: "'https://rmute.herokuapp.com/editor'" };
+        var url = { local: "http://localhost:4500/editor", heroku: 'https://rmute.herokuapp.com/editor' };
         this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__["connect"](url.heroku);
         this.socket.on('connection', function () {
             console.log('io connection established', _this.socket.nsp);
