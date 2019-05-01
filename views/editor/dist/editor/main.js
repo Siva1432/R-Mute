@@ -41,7 +41,7 @@ module.exports = "textarea{\r\n    width:70%;\r\n    height:600px;\r\n    backgr
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n  <h1>Welcome to the realtime online multiuser editor</h1>\n  <textarea #editor [(ngModel)] = \"text\" (keydown)=\"deleteVal($event,editor)\" (keypress)=\"updateText($event,editor)\"></textarea>\n\n</div>\n\n"
+module.exports = "<div>\n  <h1>Welcome to the realtime online multiuser editor</h1>\n  <h3><span>Number of users online:</span><input type=\"number\" [ngModel]=\"users\" ></h3>\n  <textarea #editor [(ngModel)] = \"text\" (keydown)=\"deleteVal($event,editor)\" (keypress)=\"updateText($event,editor)\"></textarea>\n\n</div>\n\n"
 
 /***/ }),
 
@@ -119,10 +119,15 @@ var AppComponent = /** @class */ (function () {
         this.socketService.getText();
         this.socketService.emitgetUserParams();
         this.socketService.observeServerText.subscribe();
+        this.socketService.getUsers();
         this.socketService.getServerText
             .subscribe(function (value) {
             _this.text = value.text;
             _this.idString = value.idString;
+        });
+        this.socketService.newUser.subscribe(function (val) {
+            console.log("got new user", val);
+            _this.users = val;
         });
         this.txtss.mutateText.subscribe(function (val) {
             _this.concatText(val);
@@ -247,6 +252,12 @@ var SocketService = /** @class */ (function () {
     function SocketService() {
         var _this = this;
         this.getServerText = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
+        this.newUser = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"](function (Observer) {
+            _this.socket.on("newUser", function (val) {
+                Observer.next(val);
+                //Observer.complete();
+            });
+        });
         this.observeServerText = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"](function (Observer) {
             _this.socket.on('getText', function (val) {
                 console.log("got text properties from server :", val);
@@ -279,6 +290,9 @@ var SocketService = /** @class */ (function () {
         this.emitNewOp = function (op) {
             this.socket.emit('newOperation', op);
         };
+        this.getUsers = function () {
+            this.socket.emit("getUsers");
+        };
         this.emitgetUserParams = function () {
             this.socket.emit('getUserParams');
         };
@@ -290,7 +304,11 @@ var SocketService = /** @class */ (function () {
         this.socket.on('connection', function () {
             console.log('io connection established', _this.socket.nsp);
         });
+        this.socket.on('disconnected', function () {
+            console.log("socket disconnected");
+        });
     }
+    ;
     SocketService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
             providedIn: 'root'

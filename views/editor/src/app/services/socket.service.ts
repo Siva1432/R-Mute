@@ -1,11 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
-import { Observable, Subject } from 'rxjs';
-
-
-
-
-
+import { Observable, Subject, Observer } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +14,19 @@ export class SocketService {
     this.socket= io.connect(url.heroku);
     this.socket.on('connection' , ()=>{
       console.log('io connection established',this.socket.nsp);
-    });    
-   }
+    });
+    this.socket.on('disconnected', function() {
+      console.log(`socket disconnected`);
+  })
+};
    getServerText = new Subject<{text:string,idString:string}>();
    
-   
+   newUser=new Observable<number>((Observer)=>{
+    this.socket.on(`newUser`,(val:number)=>{
+      Observer.next(val);
+      //Observer.complete();
+    });
+   });
    observeServerText= new Observable((Observer)=>{
      this.socket.on('getText',(val:{text:string,idString:string})=>{
        console.log("got text properties from server :",val);
@@ -60,7 +63,11 @@ export class SocketService {
    };
    emitNewOp = function(op){
       this.socket.emit('newOperation', op );  
+  };
+  getUsers=function(){
+    this.socket.emit(`getUsers`);
   }
+
   emitgetUserParams=function(){
     this.socket.emit('getUserParams');
   };

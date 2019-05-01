@@ -8,12 +8,14 @@ module.exports=function(io, app){
     app.locals.serverCopy='';
     app.locals.serverCounter=0;
     app.locals.idString='';
+    app.locals.users=0;
     app.locals.backup;
-    stateProperties={
-        serverCopy:app.locals.serverCopy,
-        counter:app.locals.serverCounter,
-        idString:app.locals.idString
-    }
+    stateProperties={}
+    stateProperties.serverCopy=app.locals.serverCopy;
+    stateProperties.counter=app.locals.serverCounter;
+    stateProperties.idString=app.locals.idString;
+    stateProperties.users=app.locals.users;
+    
     
 
     
@@ -22,13 +24,25 @@ module.exports=function(io, app){
         socket.on('getUserParams',()=>{
             for(let uid of uidHelper.uidPool){
                 if(uid.allocated==false){
-                    console.log(`uid send :`,uid);
-                    uidHelper.setAllocated(uid.id,true);
+                    uidHelper.setAllocated(uid.id,true,socket.id);
+                    stateProperties.users=stateProperties.users+1;
+                    console.log(`uid send :`,uid,stateProperties.users);
                     let userParams={id:uid.id,counter:stateProperties.counter}
                     socket.emit('getUserParams',userParams);
+                    socket.broadcast.emit(`newUser`,stateProperties.users);
                     break;
                 }
             }
+        });
+        socket.on(`getUsers`,()=>{
+            console.log(`getUser event emited${stateProperties.users}`)
+            socket.emit(`newUser`,stateProperties.users);
+        });
+        socket.on(`disconnect`,()=>{
+            uidHelper.disconnected(socket.id);
+            stateProperties.users=stateProperties.users-1;
+            console.log(`socket disconnected :${socket.id}, users :${stateProperties.users}`);
+           socket.broadcast.emit(`newUser`,stateProperties.users);
         });
         console.log('new connection in userRouter');
         socket.on('getText',()=>{

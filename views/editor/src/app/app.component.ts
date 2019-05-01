@@ -11,7 +11,7 @@ import { HttpClient } from 'selenium-webdriver/http';
 export class AppComponent implements OnInit {
   title = 'editor';
   idString:string;
-  
+  users:number;
   text:string;
   
   constructor( public socketService:SocketService , public txtss:TextService){}
@@ -21,14 +21,16 @@ export class AppComponent implements OnInit {
     this.socketService.getText();
     this.socketService.emitgetUserParams();
     this.socketService.observeServerText.subscribe();
+    this.socketService.getUsers();
     this.socketService.getServerText
     .subscribe((value) =>{
-       
       this.text=value.text;
       this.idString=value.idString;
-      
-      
     });
+    this.socketService.newUser.subscribe((val:number)=>{
+      console.log(`got new user`,val);
+      this.users=val;
+    })
       this.txtss.mutateText.subscribe(val =>{
       this.concatText(val);
     });

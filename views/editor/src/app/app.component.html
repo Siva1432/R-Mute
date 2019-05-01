@@ -1,5 +1,6 @@
 <div>
   <h1>Welcome to the realtime online multiuser editor</h1>
+  <h3><span>Number of users online:</span><input type="number" [ngModel]="users" ></h3>
   <textarea #editor [(ngModel)] = "text" (keydown)="deleteVal($event,editor)" (keypress)="updateText($event,editor)"></textarea>
 
 </div>
