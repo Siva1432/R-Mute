@@ -1,8 +1,6 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
-import { HttpClient } from '@angular/common/http';
-import { Observable, Subject, Observer, BehaviorSubject } from 'rxjs';
-import { text } from '@angular/core/src/render3';
+import { Observable, Subject } from 'rxjs';
 
 
 
@@ -16,7 +14,7 @@ export class SocketService {
  
   socket:any;
   isUpdate:any;
-  constructor(private http:HttpClient) {
+  constructor() {
     let url={local:`http://localhost:4500/editor`,heroku:`'https://rmute.herokuapp.com/editor'`}
     this.socket= io.connect(url.local);
     this.socket.on('connection' , ()=>{

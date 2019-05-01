@@ -161,8 +161,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_socket_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./services/socket.service */ "./src/app/services/socket.service.ts");
 /* harmony import */ var _services_text_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./services/text.service */ "./src/app/services/text.service.ts");
 /* harmony import */ var _services_operation_helpers_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./services/operation-helpers.service */ "./src/app/services/operation-helpers.service.ts");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 
 
 
@@ -170,8 +168,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
+//import {FormsModule} from '@angular/forms';
+//import { HttpClientModule } from '@angular/common/http';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -182,8 +180,6 @@ var AppModule = /** @class */ (function () {
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormsModule"],
-                _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClientModule"]
             ],
             providers: [_services_socket_service__WEBPACK_IMPORTED_MODULE_4__["SocketService"], _services_text_service__WEBPACK_IMPORTED_MODULE_5__["TextService"], _services_operation_helpers_service__WEBPACK_IMPORTED_MODULE_6__["OperationHelpersService"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
@@ -240,19 +236,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/lib/index.js");
 /* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(socket_io_client__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 
 
 
 
 var SocketService = /** @class */ (function () {
-    function SocketService(http) {
+    function SocketService() {
         var _this = this;
-        this.http = http;
-        this.getServerText = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();
-        this.observeServerText = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Observable"](function (Observer) {
+        this.getServerText = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
+        this.observeServerText = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"](function (Observer) {
             _this.socket.on('getText', function (val) {
                 console.log("got text properties from server :", val);
                 _this.getServerText.next(val);
@@ -260,19 +253,19 @@ var SocketService = /** @class */ (function () {
                 Observer.complete();
             });
         });
-        this.newOp = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Observable"](function (Observer) {
+        this.newOp = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"](function (Observer) {
             _this.socket.on("newOp", function (op) {
                 Observer.next(op);
                 //  console.log(`got new Op:`,op);
             });
         });
-        this.deleteValListner = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Observable"](function (Observer) {
+        this.deleteValListner = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"](function (Observer) {
             _this.socket.on("deleteVal", function (id) {
                 Observer.next(id);
                 console.log("got delete value at index::" + id);
             });
         });
-        this.getUserParams = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Observable"](function (Observer) {
+        this.getUserParams = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"](function (Observer) {
             _this.socket.on('getUserParams', function (data) {
                 Observer.next(data);
                 Observer.complete();
@@ -290,7 +283,8 @@ var SocketService = /** @class */ (function () {
         this.getText = function () {
             this.socket.emit('getText');
         };
-        this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__["connect"]('https://rmute.herokuapp.com/editor');
+        var url = { local: "http://localhost:4500/editor", heroku: "'https://rmute.herokuapp.com/editor'" };
+        this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__["connect"](url.local);
         this.socket.on('connection', function () {
             console.log('io connection established', _this.socket.nsp);
         });
@@ -299,7 +293,7 @@ var SocketService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
             providedIn: 'root'
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
     ], SocketService);
     return SocketService;
 }());
@@ -344,18 +338,61 @@ var TextService = /** @class */ (function () {
             return nextTo;
         };
         this.mutateText = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        this.compareId = function (id, next) {
+            if (id.length > next.length) {
+                console.log("id is greater then next");
+                return true;
+            }
+            else if (id.length == next.length) {
+                if (id > next) {
+                    console.log("id > next");
+                    return true;
+                }
+                else {
+                    console.log("id < next");
+                    return false;
+                }
+            }
+            else {
+                console.log("id < next");
+                return false;
+            }
+            ;
+        };
         this.addId = function (op, id) {
             if (id == NaN || id == undefined) {
                 id = op.c + op.id;
             }
+            var newNextTo;
+            var idArry = this.idString.split(",");
+            console.log("idArry :" + idArry);
+            if (this.idString.length > 0 && op.nextTo !== 0) {
+                for (var i = idArry.indexOf(op.nextTo) + 1; i < idArry.length; i++) {
+                    if (this.compareId(id, idArry[i])) {
+                        newNextTo = idArry[i - 1];
+                        console.log("newNextTo :" + id + " > " + newNextTo + " original nextTo:" + op.nextTo);
+                        break;
+                    }
+                    ;
+                }
+                ;
+            }
+            ;
+            if (newNextTo == undefined) {
+                switch (this.idString.length) {
+                    case 0:
+                        newNextTo = 0;
+                        break;
+                    default:
+                        (op.nextTo == 0) ? newNextTo = 0 : newNextTo = idArry[idArry.length - 1];
+                }
+            }
             // console.log(`apending id :${id}`);
-            var nextIndex = this.idString.indexOf(op.nextTo);
-            var n = op.nextTo.length;
+            var nextIndex = this.idString.indexOf(newNextTo);
+            var n = newNextTo.length;
             //console.log( `nextTo:${op.nextTo}    next index: ${nextIndex}  `);
-            switch (op.nextTo) {
-                case undefined:
-                    // console.log(`cant add undefined to Idstring`);
-                    break;
+            console.log("newNextTo :" + newNextTo);
+            switch (newNextTo) {
                 case 0:
                     (this.idString.length >= 1) ? this.idString = id + "," + this.idString : this.idString = "" + id;
                     break;
@@ -364,13 +401,15 @@ var TextService = /** @class */ (function () {
                         this.idString = this.idString.slice(0, nextIndex + n) + "," + id + this.idString.slice(nextIndex + n);
                     }
             }
+            ;
+            return newNextTo;
         };
         this.newOpeartion = this.socketService.newOp.subscribe(function (op) {
             //console.log(`local counter:${this.userParams.counter} , Op counter:${op.c}`);
             (_this.userParams.counter < op.c) ? _this.userParams.counter = op.c : console.log("got op coutner less then local");
-            _this.addId(op);
-            var index = _this.idString.split(",").indexOf(op.nextTo);
+            var newNextTo = _this.addId(op);
             //console.log(`newOp Received val at index:`,index,op,this.idString);
+            var index = _this.idString.split(",").indexOf(newNextTo);
             if (index >= -1) {
                 var concat = { val: op.val, index: index + 1, key: 'i' };
                 _this.mutateText.next(concat);
