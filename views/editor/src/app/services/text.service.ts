@@ -40,21 +40,47 @@ export class TextService {
 
    mutateText= new Subject<{val:string,index:number,key:string}>();
 
+
+   compareId=function(id,next):boolean{
+    if(id.length>next.length){
+      console.log(`id is greater then next`);
+      return true;
+      }else if(id.length== next.length){
+      if(id>next){
+      console.log(`id > next`);
+      return true;
+      }else{
+      console.log(`id < next`);
+      return false
+      }
+      
+      }else{
+        console.log(`id < next`);
+        return false;
+      };
+   };
+
+
    
     
   
-  addId=function(op,id ?):void{
+  addId=function(op,id ?):any{
     
     if(id==NaN || id==undefined){
       id=op.c+op.id
     }
     let newNextTo:any;
     let idArry:string[]=this.idString.split(`,`);
-    for(let i=idArry.indexOf(op.nextTo)+1; i<this.idString.length ;i++){
-      if(op.c+op.id>idArry[i]){
-        newNextTo=idArry[i];
+    console.log(`idArry :${idArry}`);
+  if(this.idString.length>0 && op.nextTo!==0){
+    for(let i=idArry.indexOf(op.nextTo)+1; i<idArry.length ;i++){
+      
+      if(this.compareId(id,idArry[i])){
+        newNextTo=idArry[i-1];
+        console.log(`newNextTo :${id} > ${newNextTo} original nextTo:${op.nextTo}`);
         break;
-      }
+      };
+    };
     };
 
     if(newNextTo==undefined){
@@ -63,18 +89,17 @@ export class TextService {
         newNextTo=0;
         break;
         default:
-        newNextTo = idArry[idArry.length-1];
+        (op.nextTo==0)?newNextTo=0:newNextTo = idArry[idArry.length-1];
       }
     }
    // console.log(`apending id :${id}`);
     let nextIndex= this.idString.indexOf(newNextTo);
-    let n:number=op.nextTo.length
+    let n:number=newNextTo.length;
     //console.log( `nextTo:${op.nextTo}    next index: ${nextIndex}  `);
+    console.log(`newNextTo :${newNextTo}`);
     switch(newNextTo){
-      case undefined:
-     // console.log(`cant add undefined to Idstring`);
-      break;
       case 0:
+      
       (this.idString.length>=1)? this.idString=`${id},`+this.idString :this.idString=`${id}`;
       break;
       default:
@@ -82,17 +107,17 @@ export class TextService {
                 this.idString= `${this.idString.slice(0,nextIndex+n)},${id}${this.idString.slice(nextIndex+n)}`;
               }
 
-    }    
-  }
+    };    
+    return newNextTo;
+  };
   
   newOpeartion=this.socketService.newOp.subscribe((op)=>{
     //console.log(`local counter:${this.userParams.counter} , Op counter:${op.c}`);
-    let index:number;
-    
 
     (this.userParams.counter<op.c)?this.userParams.counter=op.c:console.log(`got op coutner less then local`);
-    this.addId(op);
+    let newNextTo:string=this.addId(op);
     //console.log(`newOp Received val at index:`,index,op,this.idString);
+    let index=this.idString.split(`,`).indexOf(newNextTo);
     if(index>=-1){
     const concat={val:op.val,index:index+1,key:'i'}
     this.mutateText.next(concat);

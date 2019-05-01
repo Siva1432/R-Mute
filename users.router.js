@@ -37,7 +37,7 @@ module.exports=function(io, app){
         socket.on('newOperation',(op)=>{
            let result= ops.perform(op,stateProperties);
            serverCopy=stateProperties
-          // console.log(`result of perform operations :`,result,op,stateProperties);
+           console.log(`result of perform operations :`,result,op,stateProperties);
            if(result){
             socket.broadcast.emit('newOp',op);
                     }

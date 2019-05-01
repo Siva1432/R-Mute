@@ -13,33 +13,55 @@ module.exports={
             nextTo:nextTo
         }:console.log(`got next to undefined in addFnToBackUp`);
     },
+    compareId:function(id,next){
+        if(id.length>next.length){
+          console.log(`id is greater then next`);
+          return true;
+          }else if(id.length== next.length){
+          if(id>next){
+          console.log(`id > next`);
+          return true;
+          }else{
+          console.log(`id < next`);
+          return false
+          }
+          
+          }else{
+            console.log(`id < next`);
+            return false;
+          };
+       },
 
     stringOperations:function(op,stateProperties){
             let id=op.c+op.id;
 
 
-            this.addFnToBackup(fn);         
+            this.addFnToBackup(op);         
             let idArry=stateProperties.idString.split(`,`);
             let newNextTo;
-    for(let i=idArry.indexOf(op.nextTo)+1; i<stateProperties.idString.length ;i++){
-      if(id>idArry[i]){
-        newNextTo=idArry[i];
-        break;
-      }
-    };
+            console.log(`idArry :${idArry}`);
+            if(stateProperties.idString.length>0  && op.nextTo!==0){
 
-    if(newNextTo==undefined){
-      switch(stateProperties.idString.length){
-        case 0:
-        newNextTo=0;
-        break;
-        default:
-        newNextTo = idArry[idArry.length-1];
-      }
-    }
+                for(let i=idArry.indexOf(op.nextTo)+1; i<idArry.length ;i++){
+                  if(this.compareId(id,idArry[i])){
+                    newNextTo=idArry[i-1];
+                    break;
+                  }
+                };
+            
+            }
+                    if(newNextTo==undefined){
+                      switch(stateProperties.idString.length){
+                        case 0:
+                        newNextTo=0;
+                        break;
+                        default:
+                        (op.nextTo==0)?newNextTo=0:newNextTo = idArry[idArry.length-1];
+                      }
+                    }
    // console.log(`apending id :${id}`);
     let nextIndex= stateProperties.idString.indexOf(newNextTo);
-    let n=op.nextTo.length;
+    let n=newNextTo.length;
     //console.log( `nextTo:${op.nextTo}    next index: ${nextIndex}  `);
     switch(newNextTo){
       case undefined:
@@ -54,31 +76,17 @@ module.exports={
               }
 
     } 
-
-            // if(fn.nextTo==undefined){
-            //     console.log(`got next to undefined returning the value to the client `);
-            // }else if(fn.nextTo==0){
-            //     (stateProperties.idString.length>1)? stateProperties.idString=`${id},${stateProperties.idString}` :stateProperties.idString=`${id}`;
-            // }
-            // else{
-            //     let nextIndex=this.findIndex(fn.nextTo,stateProperties.idString);
-            //         let n=fn.nextTo.length;
-            //          console.log(`index :${nextIndex}`);
-            //           if(nextIndex>=0){
-            //         stateProperties.idString= `${stateProperties.idString.slice(0,nextIndex+n)},${id}${stateProperties.idString.slice(nextIndex+n)}`;
-            //                         }
-            //                     }
           let valIndex=this.findValId(stateProperties.idString,id);
           switch(valIndex){
               case 0:
-              stateProperties.serverCopy=`${fn.val}${stateProperties.serverCopy}`;
+              stateProperties.serverCopy=`${op.val}${stateProperties.serverCopy}`;
                break;
               default:
               stateProperties.serverCopy=
-               `${stateProperties.serverCopy.slice(0,valIndex)}${fn.val}${stateProperties.serverCopy.slice(valIndex)}`;
+               `${stateProperties.serverCopy.slice(0,valIndex)}${op.val}${stateProperties.serverCopy.slice(valIndex)}`;
               break;
             }
-             (stateProperties.counter<fn.c)? stateProperties.counter=fn.c :stateProperties.counter;       
+             (stateProperties.counter<op.c)? stateProperties.counter=op.c :stateProperties.counter;       
                 return stateProperties;
         
        
