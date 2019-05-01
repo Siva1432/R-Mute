@@ -16,7 +16,7 @@ export class SocketService {
   isUpdate:any;
   constructor() {
     let url={local:`http://localhost:4500/editor`,heroku:`'https://rmute.herokuapp.com/editor'`}
-    this.socket= io.connect(url.local);
+    this.socket= io.connect(url.heroku);
     this.socket.on('connection' , ()=>{
       console.log('io connection established',this.socket.nsp);
     });    
