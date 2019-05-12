@@ -3,12 +3,14 @@ const app= express();
 const server= require('http').createServer(app);
 const io= require('socket.io')(server);
 const bp= require('body-parser');
-const userRouter = require('./users.router')(io,app);
-
+const userRouter = require('./routes/users.router')(io,app);
+const userAuth =require(`./routes/authorise`);
 app.use(express.static(`./views/editor/dist/editor`));
 app.use('/',bp.json());
 app.use('/',bp.urlencoded({extended:true}));
-app.use('/',userRouter);
+app.use('/collab',userRouter);
+app.use('/authenticate',userAuth);
+
 //app.use(express.static('./views/editor/dist/editor'));
 // io.of('/editor')
 // .on('connection',(socket)=>{
