@@ -1,10 +1,10 @@
-const mongoose = require(`mongoose`);
+const mongoose = require(`./dbConnect`);
 const bcrypt = require(`bcrypt`);
 const saltRounds= require(`../config/config.json`).saltRounds;
 module.exports=function(){
 
     const userSchema= new mongoose.Schema({
-        firstName:{
+        firstname:{
             type:String,
             minlength:1,
             maxlength:225,
@@ -21,7 +21,6 @@ module.exports=function(){
             minlength:1,
             required:true,
             maxlength:1000,
-            required:true
         },
         email:{
             type:String,
@@ -30,10 +29,10 @@ module.exports=function(){
             required:true,
             unique:true
         },
-        projects:{
+        projects:[{
             type:mongoose.Schema.Types.ObjectId,
             ref:`projects`,
-        },
+        }],
         role:{
             type:String,
             minlength:1,
@@ -59,13 +58,13 @@ module.exports=function(){
    const addNewUser=async (user)=>{
        try{
         const newUser= await new userModel({
-            firstName:user.firstName,
-            lastName:user.lastName,
+            firstname:user.firstname,
+            lastname:user.lastname,
             email:user.email,
             password: await bcrypt.hash(user.password, saltRounds),
-            projects:{},
+            projects:[],
             collaborations:[],
-            role:user.role
+            role:"user"
         }).save();
         if(newUser){
             console.log(`new user created :`,newUser);
@@ -85,9 +84,11 @@ module.exports=function(){
 
 //Authenticate new User;
     const Authenticate=async function(user){
-        let found= await this.findUserByEmail(user.email);
-        let matched=false;
-       if(found!==null && found!==undefined){ 
+        console.log(`got user object in login: `,user.email);
+        let found= await findUserByEmail(user.email);
+        let matched;
+        console.log(`found user in login authenticate`,found);
+       if( found!==null && found!==undefined){ 
            matched= await bcrypt.compare(user.password,found.password)
             }
             else{ console.log(`sorry credentials didnt match,${matched}`)};

@@ -1,0 +1,24 @@
+<div class="container">
+    <form #loginForm="ngForm">
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" ngModel name='email' #email='ngModel' required placeholder="enter your email"> 
+    </div>
+    <div *ngIf="!email.valid && email.touched" class="alert alert-primary" role="alert">
+                   
+            <strong>Email is  required</strong>
+        </div>
+        
+    <div class="form-group">
+        <label for="password">password</label>
+        <input type="password" ngModel name='password' #password='ngModel' required placeholder="enter your password"> 
+    </div>
+    <div *ngIf="!password.valid && password.touched" class="alert alert-primary" role="alert">
+                   
+            <strong>password is required</strong>
+        </div>
+    <button [hidden]='!loginForm.valid' type="submit" (click)="submitForm(loginForm.form.controls)" class="btn btn-primary">Login</button>
+    
+    
+    </form>
+    </div>

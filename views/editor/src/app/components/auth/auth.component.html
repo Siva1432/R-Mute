@@ -1,35 +1,41 @@
-<div style="margin-top: 20px">
-  <h2>New User? Signup</h2>
-    <hr/>
-  </div>
-  <div style="margin-top: 30pt">
-  <form (ngSubmit)="onSubmit()" #signupForm="ngForm">
-    <div class="form-group">
-          <label for="firstname"><strong>First Name</strong></label>
-          <input class="form-control" id="firstNnme" [(ngModel)]="signup.firstNnme" placeholder="firstNnme" required name="firstNnme" #fullname="ngModel"/>
-        </div>
-  <div class="form-group">
-        <label for="emailField"><strong>Email address</strong></label>
-        <input type="email" class="form-control" id="emailField" [(ngModel)]="signup.email" required placeholder="name@example.com" name="uEmail" #email="ngModel"/>
-      </div>
-  <div [hidden]="email.valid || email.pristine" class="alert alert-danger">Email address is required</div>
-  <div class="form-group">
-        <label for="password"><strong>Password</strong></label>
-        <input type="password" class="form-control" id="password" [(ngModel)]="signup.password" name="password" (blur)="confirmPassword()" required placeholder="Password" #pswd="ngModel"/>
-      </div>
-  <div [hidden]="pswd.valid || pswd.pristine" class="alert alert-danger">Password is required</div>
-  <div class="form-group">
-        <label for="cnfpassword"><strong>Confirm Password</strong></label>
-        <input type="password" class="form-control" id="cnfpassword" [(ngModel)]="passwordConfirmationTxt" (blur)="confirmPassword()" name="passwordConfirmationTxt"/>
-      </div>
-  <div [hidden]="!passwordConfirmationFailed" class="alert alert-danger">Password did not match</div>
-  <div [hidden]="fullname.valid || fullname.pristine" class="alert alert-danger">Name is required</div>
-  <div class="form-group">
-        <label for="country"><strong>Country</strong></label>
-        <select class="form-control" id="country" required>
-  <option *ngFor="let country of countries" [value]="country">{{country}}</option>
-        </select>
-      </div>
-      <button type="submit" class="btn btn-success" [disabled]="!signupForm.form.valid">Submit</button>
-    </form>
-  </div>
+<div class="container-fluid id='signUpContainer'">
+<form #signUpForm="ngForm">
+<div class="form-group">
+<label for="firstname">First Name</label>
+<input type="text" ngModel name='firstname' minlength =2 maxlength=15 #firstname='ngModel' required placeholder="enter your firstname"> 
+</div>
+<div *ngIf="!firstname.valid && firstname.touched" class="alert alert-primary" role="alert">
+               
+    <strong>firstname required</strong>
+</div>
+<div class="form-group">
+    <label for="lastname">lastname</label>
+    <input type="text" ngModel name='lastname' #lastname='ngModel' required placeholder="enter your lastname"> 
+</div>
+<div *ngIf="!lastname.valid && lastname.touched" class="alert alert-primary" role="alert">
+               
+        <strong>lastname is required</strong>
+    </div>
+    
+<div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" ngModel name='email' #email='ngModel' required placeholder="enter your email"> 
+</div>
+<div *ngIf="!email.valid && email.touched" class="alert alert-primary" role="alert">
+               
+        <strong>Email is  required</strong>
+    </div>
+    
+<div class="form-group">
+    <label for="password">password</label>
+    <input type="password" ngModel name='password' #password='ngModel' required placeholder="enter your password"> 
+</div>
+<div *ngIf="!password.valid && password.touched" class="alert alert-primary" role="alert">
+               
+        <strong>password is required</strong>
+    </div>
+<button [hidden]='!signUpForm.valid' type="submit" (click)="submitForm(signUpForm.form.controls)" class="btn btn-primary">Submit</button>
+
+
+</form>
+</div>
