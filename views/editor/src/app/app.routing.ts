@@ -1,14 +1,11 @@
-import { AppComponent } from './app.component';
+
 import { AuthComponent } from './components/auth/auth.component';
-import { Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
+
 const appRoutes: Routes = [
-    { path: 'editor',
-      component: AppComponent
-    },
     {
       path: 'signup',
       component: AuthComponent
@@ -17,9 +14,17 @@ const appRoutes: Routes = [
       path: 'login',
       component: LoginComponent
     },{
-      path:'home',
+      path:'',
       component:HomeComponent
-    }
+    },
+    {
+      path:'authorized',
+      loadChildren:'./editor-module.routing#EditorRoutingModule'
+    },
+    {
+      path:'**',
+      component:HomeComponent
+  }
   ];
   @NgModule({
     imports: [

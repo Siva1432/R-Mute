@@ -1,14 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { SocketService } from './services/socket.service';
+import { SocketService } from '../../services/socket.service';
 //import { nextContext } from '@angular/core/src/render3';
-import { TextService } from './services/text.service';
-import { HttpClient } from 'selenium-webdriver/http';
+import { TextService } from '../../services/text.service';
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'editor-component',
+  templateUrl: './editor.component.html',
+  styleUrls: ['./editor.component.css']
 })
-export class AppComponent implements OnInit {
+export class EditorComponent implements OnInit {
   title = 'editor';
   idString:string;
   users:number;

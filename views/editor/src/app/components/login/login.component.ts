@@ -23,6 +23,10 @@ export class LoginComponent implements OnInit {
     };
     this.mhs.submitLogin(credentials);
     console.log(`got sign up object:`, credentials);
+  };
+
+  logut=function(){
+    this.mhs.logout();
   }
 
 }

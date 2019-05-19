@@ -50,8 +50,9 @@ module.exports=function(){
     
     const userModel= mongoose.model(`users`,userSchema);
    const findUserByEmail= async function(email){
-
-        return await userModel.findOne({email:email});
+        console.log(`got email in findUserByEmail method :${email}`);
+        return await userModel.findOne({email:email})
+        
     };
 
 //add new user to db
@@ -87,7 +88,7 @@ module.exports=function(){
         console.log(`got user object in login: `,user.email);
         let found= await findUserByEmail(user.email);
         let matched;
-        console.log(`found user in login authenticate`,found);
+        console.log(`found user in login authenticate`,await found);
        if( found!==null && found!==undefined){ 
            matched= await bcrypt.compare(user.password,found.password)
             }

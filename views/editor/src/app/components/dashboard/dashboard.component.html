@@ -1,0 +1,42 @@
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" id="navId">
+  <li class="nav-item">
+    <a href="#tab1Id" class="nav-link active">Dashboard</a>
+  </li>
+  <li class="nav-item">
+    <a href="#tab5Id" class="nav-link">Editor</a>
+  </li>
+  <li class="nav-item">
+    <a (click)='logOut()' class="nav-link">Logout</a>
+  </li>
+</ul>
+
+<router-outlet></router-outlet>
+<div class="row">
+  <div class="col-sm-5">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title"><p>{{user.firstname}}</p><p>{{user.lastname}}</p></h3>
+       <div><span for= 'email'class="card-controll">Email</span>
+        <p class="card-text">{{user.email}}</p>
+       </div>
+      </div>
+    </div>
+  </div>
+</div>
+<table class="table table-striped table-inverse table-responsive">
+  <thead class="thead-inverse">
+    <tr>
+      <th>Project</th>
+    </tr>
+    </thead>
+    
+    <tbody >
+     <!-- <tr *ngIf="user.project.length>0">
+        <td scope="row" *ngFor=" #project of user.projects">
+         {{project.name}}
+        </td>
+      </tr>-->
+    </tbody>
+  
+</table>
