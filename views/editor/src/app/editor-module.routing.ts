@@ -8,33 +8,48 @@ import { OperationHelpersService } from './services/operation-helpers.service';
 import { HttpInterceptorService } from './gaurds/http-interseptor.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthGaurd } from './gaurds/canActivate';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GaurdService } from './services/gaurd.service';
+import { EditorRootComponent } from './components/editor-root/editor-root.component';
+import { CommonModule } from '@angular/common';
+import { Paths } from './services/paths';
+import { CookieService } from 'ngx-cookie-service';
+import { HttpService } from './services/auth.service';
 
 const secureRoutes: Routes = [
-    { path: 'editor',
-      component: EditorComponent,
-      canActivate:[AuthGaurd],
-      children:[
-        {path:'/:id'}
-      ]
-    },
-    {
-        path:'dashboard/:id',
-        component:DashboardComponent,
-        canActivate:[AuthGaurd]
-    },
+  {
+    path:'',
+    component:EditorRootComponent,
+    children:[
+              { path: 'editor',
+              canActivate:[AuthGaurd],
+              children:[
+                {path:':id',
+                component: EditorComponent}
+              ]
+            },
+            {
+                path:'dashboard/:id',
+                component:DashboardComponent,
+                canActivate:[AuthGaurd]
+            },
+          
+    ]
+  }
    
   ];
   @NgModule({
     imports: [
       RouterModule.forChild(secureRoutes),
+      CommonModule,
       FormsModule,
+      ReactiveFormsModule,
       HttpClientModule
     ],
     declarations:[
         EditorComponent,
         DashboardComponent,
+        EditorRootComponent,
         
     ],
     providers:[
@@ -46,7 +61,10 @@ const secureRoutes: Routes = [
         useClass:HttpInterceptorService,
         multi: true},
         AuthGaurd,
-        GaurdService
+        GaurdService,
+        Paths,
+        CookieService,
+        HttpService
     ],
     exports: [
       RouterModule

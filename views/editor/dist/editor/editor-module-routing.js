@@ -2560,7 +2560,7 @@ if (typeof WebSocket !== 'undefined') {
   BrowserWebSocket = self.WebSocket || self.MozWebSocket;
 } else {
   try {
-    NodeWebSocket = __webpack_require__(/*! ws */ 1);
+    NodeWebSocket = __webpack_require__(/*! ws */ 4);
   } catch (e) { }
 }
 
@@ -7032,7 +7032,7 @@ module.exports = yeast;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAvY29tcG9uZW50cy9kYXNoYm9hcmQvZGFzaGJvYXJkLmNvbXBvbmVudC5jc3MifQ== */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJkYXNoYm9hcmQvZGFzaGJvYXJkLmNvbXBvbmVudC5jc3MifQ== */"
 
 /***/ }),
 
@@ -7100,6 +7100,62 @@ var DashboardComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/components/editor-root/editor-root.component.css":
+/*!******************************************************************!*\
+  !*** ./src/app/components/editor-root/editor-root.component.css ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJlZGl0b3Itcm9vdC9lZGl0b3Itcm9vdC5jb21wb25lbnQuY3NzIn0= */"
+
+/***/ }),
+
+/***/ "./src/app/components/editor-root/editor-root.component.html":
+/*!*******************************************************************!*\
+  !*** ./src/app/components/editor-root/editor-root.component.html ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  editor-root works!\n</p>\n"
+
+/***/ }),
+
+/***/ "./src/app/components/editor-root/editor-root.component.ts":
+/*!*****************************************************************!*\
+  !*** ./src/app/components/editor-root/editor-root.component.ts ***!
+  \*****************************************************************/
+/*! exports provided: EditorRootComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EditorRootComponent", function() { return EditorRootComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var EditorRootComponent = /** @class */ (function () {
+    function EditorRootComponent() {
+    }
+    EditorRootComponent.prototype.ngOnInit = function () {
+    };
+    EditorRootComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-editor-root',
+            template: __webpack_require__(/*! ./editor-root.component.html */ "./src/app/components/editor-root/editor-root.component.html"),
+            styles: [__webpack_require__(/*! ./editor-root.component.css */ "./src/app/components/editor-root/editor-root.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], EditorRootComponent);
+    return EditorRootComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/components/editor/editor.component.css":
 /*!********************************************************!*\
   !*** ./src/app/components/editor/editor.component.css ***!
@@ -7107,7 +7163,7 @@ var DashboardComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "textarea{\r\n    width:70%;\r\n    height:600px;\r\n    background-color: black;\r\n    color:white;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9jb21wb25lbnRzL2VkaXRvci9lZGl0b3IuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLFNBQVM7SUFDVCxZQUFZO0lBQ1osdUJBQXVCO0lBQ3ZCLFdBQVc7QUFDZiIsImZpbGUiOiJhcHAvY29tcG9uZW50cy9lZGl0b3IvZWRpdG9yLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJ0ZXh0YXJlYXtcclxuICAgIHdpZHRoOjcwJTtcclxuICAgIGhlaWdodDo2MDBweDtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IGJsYWNrO1xyXG4gICAgY29sb3I6d2hpdGU7XHJcbn1cclxuIl19 */"
+module.exports = "textarea{\r\n    width:70%;\r\n    height:600px;\r\n    background-color: black;\r\n    color:white;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImVkaXRvci9lZGl0b3IuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLFNBQVM7SUFDVCxZQUFZO0lBQ1osdUJBQXVCO0lBQ3ZCLFdBQVc7QUFDZiIsImZpbGUiOiJlZGl0b3IvZWRpdG9yLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJ0ZXh0YXJlYXtcclxuICAgIHdpZHRoOjcwJTtcclxuICAgIGhlaWdodDo2MDBweDtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IGJsYWNrO1xyXG4gICAgY29sb3I6d2hpdGU7XHJcbn1cclxuIl19 */"
 
 /***/ }),
 
@@ -7249,6 +7305,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _gaurds_canActivate__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./gaurds/canActivate */ "./src/app/gaurds/canActivate.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _services_gaurd_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./services/gaurd.service */ "./src/app/services/gaurd.service.ts");
+/* harmony import */ var _components_editor_root_editor_root_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/editor-root/editor-root.component */ "./src/app/components/editor-root/editor-root.component.ts");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _services_paths__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./services/paths */ "./src/app/services/paths.ts");
+/* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/index.js");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./services/auth.service */ "./src/app/services/auth.service.ts");
+
+
+
+
+
 
 
 
@@ -7263,18 +7329,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var secureRoutes = [
-    { path: 'editor',
-        component: _components_editor_editor_component__WEBPACK_IMPORTED_MODULE_1__["EditorComponent"],
-        canActivate: [_gaurds_canActivate__WEBPACK_IMPORTED_MODULE_10__["AuthGaurd"]],
-        children: [
-            { path: '/:id' }
-        ]
-    },
     {
-        path: 'dashboard/:id',
-        component: _components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_4__["DashboardComponent"],
-        canActivate: [_gaurds_canActivate__WEBPACK_IMPORTED_MODULE_10__["AuthGaurd"]]
-    },
+        path: '',
+        component: _components_editor_root_editor_root_component__WEBPACK_IMPORTED_MODULE_13__["EditorRootComponent"],
+        children: [
+            { path: 'editor',
+                canActivate: [_gaurds_canActivate__WEBPACK_IMPORTED_MODULE_10__["AuthGaurd"]],
+                children: [
+                    { path: ':id',
+                        component: _components_editor_editor_component__WEBPACK_IMPORTED_MODULE_1__["EditorComponent"] }
+                ]
+            },
+            {
+                path: 'dashboard/:id',
+                component: _components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_4__["DashboardComponent"],
+                canActivate: [_gaurds_canActivate__WEBPACK_IMPORTED_MODULE_10__["AuthGaurd"]]
+            },
+        ]
+    }
 ];
 var EditorRoutingModule = /** @class */ (function () {
     function EditorRoutingModule() {
@@ -7283,12 +7355,15 @@ var EditorRoutingModule = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["NgModule"])({
             imports: [
                 _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(secureRoutes),
+                _angular_common__WEBPACK_IMPORTED_MODULE_14__["CommonModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_11__["FormsModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_11__["ReactiveFormsModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HttpClientModule"]
             ],
             declarations: [
                 _components_editor_editor_component__WEBPACK_IMPORTED_MODULE_1__["EditorComponent"],
                 _components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_4__["DashboardComponent"],
+                _components_editor_root_editor_root_component__WEBPACK_IMPORTED_MODULE_13__["EditorRootComponent"],
             ],
             providers: [
                 _services_socket_service__WEBPACK_IMPORTED_MODULE_5__["SocketService"],
@@ -7299,7 +7374,10 @@ var EditorRoutingModule = /** @class */ (function () {
                     useClass: _gaurds_http_interseptor_service__WEBPACK_IMPORTED_MODULE_8__["HttpInterceptorService"],
                     multi: true },
                 _gaurds_canActivate__WEBPACK_IMPORTED_MODULE_10__["AuthGaurd"],
-                _services_gaurd_service__WEBPACK_IMPORTED_MODULE_12__["GaurdService"]
+                _services_gaurd_service__WEBPACK_IMPORTED_MODULE_12__["GaurdService"],
+                _services_paths__WEBPACK_IMPORTED_MODULE_15__["Paths"],
+                ngx_cookie_service__WEBPACK_IMPORTED_MODULE_16__["CookieService"],
+                _services_auth_service__WEBPACK_IMPORTED_MODULE_17__["HttpService"]
             ],
             exports: [
                 _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]
@@ -7827,7 +7905,7 @@ var TextService = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 1:
+/***/ 4:
 /*!********************!*\
   !*** ws (ignored) ***!
   \********************/
