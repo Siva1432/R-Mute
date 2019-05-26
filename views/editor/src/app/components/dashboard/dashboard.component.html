@@ -16,9 +16,9 @@
   <div class="col-sm-5">
     <div class="card">
       <div class="card-body">
-        <h3 class="card-title"><p>{{user.firstname}}</p><p>{{user.lastname}}</p></h3>
+        <h3 class="card-title"><p>{{user.firstname || async}}</p><p>{{user.lastname || async}}</p></h3>
        <div><span for= 'email'class="card-controll">Email</span>
-        <p class="card-text">{{user.email}}</p>
+        <p class="card-text">{{user.email || async}}</p>
        </div>
       </div>
     </div>

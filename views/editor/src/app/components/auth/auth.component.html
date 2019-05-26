@@ -1,8 +1,13 @@
-<div class="container-fluid id='signUpContainer'">
+
+
+<div class="container-fluid col-md-6" id='signUpContainer'>
+        <div class="container-fluid signUpHeader">
+                <h3>SIGN UP</h3> 
+            </div>
 <form #signUpForm="ngForm">
 <div class="form-group">
 <label for="firstname">First Name</label>
-<input type="text" ngModel name='firstname' minlength =2 maxlength=15 #firstname='ngModel' required placeholder="enter your firstname"> 
+<input type="text" class="form-control firstname" ngModel name='firstname' minlength =2 maxlength=15 #firstname='ngModel' required placeholder="enter your firstname"> 
 </div>
 <div *ngIf="!firstname.valid && firstname.touched" class="alert alert-primary" role="alert">
                
@@ -10,7 +15,7 @@
 </div>
 <div class="form-group">
     <label for="lastname">lastname</label>
-    <input type="text" ngModel name='lastname' #lastname='ngModel' required placeholder="enter your lastname"> 
+    <input type="text" class="form-control lastname" ngModel name='lastname' #lastname='ngModel' required placeholder="enter your lastname"> 
 </div>
 <div *ngIf="!lastname.valid && lastname.touched" class="alert alert-primary" role="alert">
                
@@ -19,7 +24,7 @@
     
 <div class="form-group">
     <label for="email">Email</label>
-    <input type="email" ngModel name='email' #email='ngModel' required placeholder="enter your email"> 
+    <input class="form-control email" type="email" ngModel name='email' #email='ngModel' required placeholder="enter your email"> 
 </div>
 <div *ngIf="!email.valid && email.touched" class="alert alert-primary" role="alert">
                
@@ -28,7 +33,7 @@
     
 <div class="form-group">
     <label for="password">password</label>
-    <input type="password" ngModel name='password' #password='ngModel' required placeholder="enter your password"> 
+    <input type="password" class="form-control password" ngModel name='password' #password='ngModel' required placeholder="enter your password"> 
 </div>
 <div *ngIf="!password.valid && password.touched" class="alert alert-primary" role="alert">
                
@@ -39,3 +44,5 @@
 
 </form>
 </div>
+
+

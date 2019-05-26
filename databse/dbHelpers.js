@@ -49,11 +49,17 @@ module.exports=function(){
     });
     
     const userModel= mongoose.model(`users`,userSchema);
+
+    const findUserById =async (id)=>{
+        return await userModel.findOne({_id:id}).select('firstname lastname email collaborations projects');
+    }
    const findUserByEmail= async function(email){
         console.log(`got email in findUserByEmail method :${email}`);
         return await userModel.findOne({email:email})
         
     };
+
+
 
 //add new user to db
    const addNewUser=async (user)=>{
@@ -98,7 +104,8 @@ module.exports=function(){
 return {
     findUserByEmail,
     addNewUser,
-    Authenticate
+    Authenticate,
+    findUserById
 }
 
 };

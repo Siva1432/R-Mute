@@ -1,3 +1,10 @@
 #signUpContainer{
-    align-items: center;
+    margin-top:30px;
+    border: 0.5px solid grey;
+    padding:30px;
+    align-content: center;
+    
+}
+.signUpHeader{
+    text-align:center;
 }

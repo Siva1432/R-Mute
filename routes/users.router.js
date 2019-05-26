@@ -66,7 +66,7 @@ module.exports=function(io, app){
     });
 
 //console.log('rotuer called');
-router.get('/',async(req,res,next)=>{
+router.get('**',async(req,res,next)=>{
     let viewsPath=path.join(__dirname,'../views/editor/dist/editor/index.html');
     console.log(`serving index.html in path :${viewsPath}`);
 res.sendFile(viewsPath);

@@ -60,7 +60,7 @@ var appRoutes = [
             },
             {
                 path: '**',
-                component: _components_home_home_component__WEBPACK_IMPORTED_MODULE_7__["HomeComponent"]
+                redirectTo: '/home'
             }
         ]
     },
@@ -107,7 +107,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#signUpContainer{\r\n    align-items: center;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImF1dGgvYXV0aC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksbUJBQW1CO0FBQ3ZCIiwiZmlsZSI6ImF1dGgvYXV0aC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI3NpZ25VcENvbnRhaW5lcntcclxuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XHJcbn0iXX0= */"
+module.exports = "#signUpContainer{\r\n    margin-top:30px;\r\n    border: 0.5px solid grey;\r\n    padding:30px;\r\n    align-content: center;\r\n    \r\n}\r\n.signUpHeader{\r\n    text-align:center;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9jb21wb25lbnRzL2F1dGgvYXV0aC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksZUFBZTtJQUNmLHdCQUF3QjtJQUN4QixZQUFZO0lBQ1oscUJBQXFCOztBQUV6QjtBQUNBO0lBQ0ksaUJBQWlCO0FBQ3JCIiwiZmlsZSI6ImFwcC9jb21wb25lbnRzL2F1dGgvYXV0aC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI3NpZ25VcENvbnRhaW5lcntcclxuICAgIG1hcmdpbi10b3A6MzBweDtcclxuICAgIGJvcmRlcjogMC41cHggc29saWQgZ3JleTtcclxuICAgIHBhZGRpbmc6MzBweDtcclxuICAgIGFsaWduLWNvbnRlbnQ6IGNlbnRlcjtcclxuICAgIFxyXG59XHJcbi5zaWduVXBIZWFkZXJ7XHJcbiAgICB0ZXh0LWFsaWduOmNlbnRlcjtcclxufSJdfQ== */"
 
 /***/ }),
 
@@ -118,7 +118,7 @@ module.exports = "#signUpContainer{\r\n    align-items: center;\r\n}\r\n/*# sour
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid id='signUpContainer'\">\r\n<form #signUpForm=\"ngForm\">\r\n<div class=\"form-group\">\r\n<label for=\"firstname\">First Name</label>\r\n<input type=\"text\" ngModel name='firstname' minlength =2 maxlength=15 #firstname='ngModel' required placeholder=\"enter your firstname\"> \r\n</div>\r\n<div *ngIf=\"!firstname.valid && firstname.touched\" class=\"alert alert-primary\" role=\"alert\">\r\n               \r\n    <strong>firstname required</strong>\r\n</div>\r\n<div class=\"form-group\">\r\n    <label for=\"lastname\">lastname</label>\r\n    <input type=\"text\" ngModel name='lastname' #lastname='ngModel' required placeholder=\"enter your lastname\"> \r\n</div>\r\n<div *ngIf=\"!lastname.valid && lastname.touched\" class=\"alert alert-primary\" role=\"alert\">\r\n               \r\n        <strong>lastname is required</strong>\r\n    </div>\r\n    \r\n<div class=\"form-group\">\r\n    <label for=\"email\">Email</label>\r\n    <input type=\"email\" ngModel name='email' #email='ngModel' required placeholder=\"enter your email\"> \r\n</div>\r\n<div *ngIf=\"!email.valid && email.touched\" class=\"alert alert-primary\" role=\"alert\">\r\n               \r\n        <strong>Email is  required</strong>\r\n    </div>\r\n    \r\n<div class=\"form-group\">\r\n    <label for=\"password\">password</label>\r\n    <input type=\"password\" ngModel name='password' #password='ngModel' required placeholder=\"enter your password\"> \r\n</div>\r\n<div *ngIf=\"!password.valid && password.touched\" class=\"alert alert-primary\" role=\"alert\">\r\n               \r\n        <strong>password is required</strong>\r\n    </div>\r\n<button [hidden]='!signUpForm.valid' type=\"submit\" (click)=\"submitForm(signUpForm.form.controls)\" class=\"btn btn-primary\">Submit</button>\r\n\r\n\r\n</form>\r\n</div>"
+module.exports = "\r\n\r\n<div class=\"container-fluid col-md-6\" id='signUpContainer'>\r\n        <div class=\"container-fluid signUpHeader\">\r\n                <h3>SIGN UP</h3> \r\n            </div>\r\n<form #signUpForm=\"ngForm\">\r\n<div class=\"form-group\">\r\n<label for=\"firstname\">First Name</label>\r\n<input type=\"text\" class=\"form-control firstname\" ngModel name='firstname' minlength =2 maxlength=15 #firstname='ngModel' required placeholder=\"enter your firstname\"> \r\n</div>\r\n<div *ngIf=\"!firstname.valid && firstname.touched\" class=\"alert alert-primary\" role=\"alert\">\r\n               \r\n    <strong>firstname required</strong>\r\n</div>\r\n<div class=\"form-group\">\r\n    <label for=\"lastname\">lastname</label>\r\n    <input type=\"text\" class=\"form-control lastname\" ngModel name='lastname' #lastname='ngModel' required placeholder=\"enter your lastname\"> \r\n</div>\r\n<div *ngIf=\"!lastname.valid && lastname.touched\" class=\"alert alert-primary\" role=\"alert\">\r\n               \r\n        <strong>lastname is required</strong>\r\n    </div>\r\n    \r\n<div class=\"form-group\">\r\n    <label for=\"email\">Email</label>\r\n    <input class=\"form-control email\" type=\"email\" ngModel name='email' #email='ngModel' required placeholder=\"enter your email\"> \r\n</div>\r\n<div *ngIf=\"!email.valid && email.touched\" class=\"alert alert-primary\" role=\"alert\">\r\n               \r\n        <strong>Email is  required</strong>\r\n    </div>\r\n    \r\n<div class=\"form-group\">\r\n    <label for=\"password\">password</label>\r\n    <input type=\"password\" class=\"form-control password\" ngModel name='password' #password='ngModel' required placeholder=\"enter your password\"> \r\n</div>\r\n<div *ngIf=\"!password.valid && password.touched\" class=\"alert alert-primary\" role=\"alert\">\r\n               \r\n        <strong>password is required</strong>\r\n    </div>\r\n<button [hidden]='!signUpForm.valid' type=\"submit\" (click)=\"submitForm(signUpForm.form.controls)\" class=\"btn btn-primary\">Submit</button>\r\n\r\n\r\n</form>\r\n</div>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -176,7 +176,7 @@ var AuthComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhdXRob3JpemVkL2F1dGhvcml6ZWQuY29tcG9uZW50LmNzcyJ9 */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAvY29tcG9uZW50cy9hdXRob3JpemVkL2F1dGhvcml6ZWQuY29tcG9uZW50LmNzcyJ9 */"
 
 /***/ }),
 
@@ -232,7 +232,7 @@ var AuthorizedComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJob21lLXJvb3QvaG9tZS1yb290LmNvbXBvbmVudC5jc3MifQ== */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAvY29tcG9uZW50cy9ob21lLXJvb3QvaG9tZS1yb290LmNvbXBvbmVudC5jc3MifQ== */"
 
 /***/ }),
 
@@ -243,7 +243,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ul class=\"nav nav-tabs nav-stacked\">\n  <li class=\"nav-item\">\n    <a routerLink=\"editor\" class=\"nav-link active\">editor</a>\n  </li>\n  <li class=\"nav-item\">\n    <a routerLink=\"signup\" class=\"nav-link\">SignUp</a>\n  </li>\n  <li class=\"nav-item disabled\">\n    <a routerLink=\"login\" class=\"nav-link\">Login</a>\n  </li>\n</ul>\n\n<div>\n  <router-outlet></router-outlet>\n</div>"
+module.exports = "<ul class=\"nav nav-tabs nav-stacked\">\n  <li class=\"nav-item\">\n    <a routerLink=\"/home\" class=\"nav-link\">Home</a>\n  </li>\n  <li class=\"nav-item\">\n    <a routerLink=\"/signup\" class=\"nav-link\">SignUp</a>\n  </li>\n  <li class=\"nav-item disabled\">\n    <a routerLink=\"/login\" class=\"nav-link\">Login</a>\n  </li>\n</ul>\n\n<div>\n  <router-outlet></router-outlet>\n</div>"
 
 /***/ }),
 
@@ -288,7 +288,7 @@ var HomeRootComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJob21lL2hvbWUuY29tcG9uZW50LmNzcyJ9 */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAvY29tcG9uZW50cy9ob21lL2hvbWUuY29tcG9uZW50LmNzcyJ9 */"
 
 /***/ }),
 
@@ -344,7 +344,7 @@ var HomeComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJsb2dpbi9sb2dpbi5jb21wb25lbnQuY3NzIn0= */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAvY29tcG9uZW50cy9sb2dpbi9sb2dpbi5jb21wb25lbnQuY3NzIn0= */"
 
 /***/ }),
 
@@ -414,7 +414,7 @@ var LoginComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuLi9wYWdlLW5vdC1mb3VuZC9wYWdlLW5vdC1mb3VuZC5jb21wb25lbnQuY3NzIn0= */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAvcGFnZS1ub3QtZm91bmQvcGFnZS1ub3QtZm91bmQuY29tcG9uZW50LmNzcyJ9 */"
 
 /***/ }),
 
@@ -457,6 +457,71 @@ var PageNotFoundComponent = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
     ], PageNotFoundComponent);
     return PageNotFoundComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/auth.service.ts":
+/*!******************************************!*\
+  !*** ./src/app/services/auth.service.ts ***!
+  \******************************************/
+/*! exports provided: HttpService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HttpService", function() { return HttpService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/index.js");
+
+
+
+
+
+var HttpService = /** @class */ (function () {
+    function HttpService(http, router, cs) {
+        this.http = http;
+        this.router = router;
+        this.cs = cs;
+        this.submitLogin = function (credentials) {
+            var _this = this;
+            this.http.post("http://localhost:4500/authenticate/login", credentials, { observe: 'response' })
+                .subscribe(function (res) {
+                console.log("got response from server", res);
+                if (res.status == 200) {
+                    _this.router.navigate(['/authorized/', res.body], { queryParamsHandling: 'merge' });
+                }
+                else {
+                    console.log("sorry login failed,", res);
+                }
+            });
+        };
+        this.submitSignUp = function (credentials) {
+            var _this = this;
+            this.http.post("http://localhost:4500/authenticate/signup", credentials, { observe: 'response' })
+                .subscribe(function (res) {
+                console.log("got response from server", res);
+                if (res.status == 200) {
+                    _this.router.navigate(['/authorized/', res.body], { queryParamsHandling: 'merge' });
+                }
+                else {
+                    console.log("sorry login failed,", res);
+                }
+            });
+        };
+    }
+    HttpService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], ngx_cookie_service__WEBPACK_IMPORTED_MODULE_4__["CookieService"]])
+    ], HttpService);
+    return HttpService;
 }());
 
 

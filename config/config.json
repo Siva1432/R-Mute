@@ -3,6 +3,6 @@
     "userDbURL":"",
     "mlabdbURI":"mongodb://siva1432:sivasai222@ds157276.mlab.com:57276/rmute",
     "saltRounds":10,
-    "RSA_PRIVATE_KEY":"process.env.RSA_PRIVATE_KEY || sivasai222",
+    "RSA_PRIVATE_KEY":"process.env.RSA_PRIVATE_KEY || U7JTXX3O758DW76M7LUS0WU2",
     "XSRF_keyBytes":"process.env.XSRF_keyBytes || 10"
 }

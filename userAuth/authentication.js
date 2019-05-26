@@ -5,6 +5,7 @@ const secureRandom= require('secure-random');
 const authManager=require(`./userAuthManager`);
 const RSA_PRIVATE_KEY= require(`../config/config.json`).RSA_PRIVATE_KEY;
 const crypto= require(`crypto`);
+const config=require('../config/config.json');
 
 module.exports=function(){
 
@@ -39,74 +40,67 @@ const login=async function(user){
 const genToken = crypto.randomBytes(48).toString('hex');
 
 const manageUser= function(user){
+    const usersessionToken=genToken;
     claims = {
         sub:user._id,
         role:'user',
+        sessionToken:usersessionToken
     };
-    let signingKey = secureRandom(256, {type: 'Buffer'})
-    let jwt= njwt.create(claims,signingKey);
+    //let signingKey = secureRandom(256, {type: 'Buffer'});
+    console.log('signin key:',config.RSA_PRIVATE_KEY);
+    let jwt= njwt.create(claims,Buffer.from(config.RSA_PRIVATE_KEY, 'base64'));
+    
     
     authManager[user._id]={xsrfToken:xsrfToken=genToken,
-        signingKey:signingKey.toString('base64')
+        sessionToken:usersessionToken
     };
     console.log(`authmanager :`,authManager);
-    const send={
-        id:user._id,
-        firstname:user.firstname,
-        lastname:user.lastname,
-        email:user.email,
-        collaborations:user.collaborations,
-        projects:user.projects
-    };
-    console.log(`sending:`,send);
-    return {jwtBearerToken:jwt.compact(), xsrfToken:authManager[user.id].xsrfToken,sendUser:send};   
+    // const send={
+    //     id:user._id,
+    // };
+    return {jwtBearerToken:jwt.compact(), xsrfToken:authManager[user.id].xsrfToken,uid:user._id};   
 };
 
-const verifyTokens=async function(tokens, id){
+const verifyTokens=async function(tokens){
     try{
-    const userSession = authManager[id];
-   var isValid;
-    if(userSession){
-      await njwt.verify(tokens.sessionid,Buffer.from(userSession.signingKey, 'base64'),(err,verified)=>{
+    
+   var uid;
+    
+      await njwt.verify(tokens.sessionid,Buffer.from(config.RSA_PRIVATE_KEY, 'base64'),(err,verified)=>{
            if(err) {
                console.log('error in jwt verify',err,userSession.signingKey);
-           return false;}
+           }
            if(verified) {
-             
-               
-               (userSession.xsrfToken==tokens.xsrfToken)? isValid=true:isValid =false;
-               console.log('veriffied',verified.body,isValid);
-              
+               console.log('veriffied',verified.body);
+            const userSession = authManager[verified.body.sub];
+            if(userSession){
+            (userSession.xsrfToken==tokens.xsrfToken &&
+             userSession.sessionToken==verified.body.sessionToken)?
+             uid =verified.body.sub:console.log('xsrf and session match failed');
+            }
             }
        });
        
-    }else{
-        return false;
-    }}catch(err){
+    }catch(err){
         console.log(err.message);
     };
-    console.log(`sending isValid:`,isValid);
-    return isValid
+    console.log(`sending uid after token verification:`,uid);
+    return uid
 };
 
 const isAuthorized=async (req,res,next)=>{
-    console.log(`checking tokens on is valid route`,req.cookies,req.body.id);
+    console.log(`checking tokens on is valid route`,req.cookies);
     if(req.cookies.sessionid){
         
-        const verify= await verifyTokens(req.cookies,req.body.id);
-        console.log('verify :',verify);
-       if (await verify==true){
+        const uid= await verifyTokens(req.cookies);
+        console.log('verified uid :',uid);
+       if (uid){
            res.locals.status=200;
-            res.locals.send=true;
-        }
-        else{
+           res.locals.uid=uid;
+        }else{
             res.locals.status=400;
-            res.locals.send=false;}
-        next();
+        }
     }
-    else{
-        res.locals.status=400;
-        res.locals.send=false;}
     next();
 };
 
@@ -116,6 +110,8 @@ const logoutUser=function(id){
         delete authManager[id];
     };
 };
+findUserById=AH.findUserById
+
 
 return {
     login,
@@ -123,7 +119,8 @@ return {
     manageUser,
     verifyTokens,
     isAuthorized,
-    logoutUser
-}
+    logoutUser,
+    findUserById
+};
 
 };

@@ -13,7 +13,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class HttpService {
 
   User:User;
-  getUser= new BehaviorSubject<User>({id:'',firstname:'',lastname:'',email:'',collaborations:[],projects:[]});
+  
 
   constructor(private http:HttpClient,private router:Router,private cs:CookieService, ) {
 
@@ -22,37 +22,31 @@ export class HttpService {
    
   submitLogin = function(credentials){
      
-     this.http.post(`http://localhost:4500/authenticate/login`,credentials).subscribe((val)=>{
-       console.log(`got response from server`,val);
-       this.User=val;
-       
-       this.router.navigate(['/authorized/dashboard',val.id]);
-       this.getUser.next(val);
+     this.http.post(`http://localhost:4500/authenticate/login`,
+                      credentials,
+                      {observe:'response'})
+     .subscribe((res:HttpResponse<any>)=>{
+       console.log(`got response from server`,res);
+      if(res.status==200){
+        this.router.navigate(['/authorized/',res.body],{queryParamsHandling:'merge'});
+      }else{
+        console.log(`sorry login failed,` ,res);
+      }
      });
    };
 
    submitSignUp = function(credentials){
-    this.http.post(`http://localhost:4500/authenticate/signup`,credentials).subscribe((val)=>{
-      console.log(`got response from server`,val);
-      this.User=val;
-     
-      this.router.navigate(['/authorized/dashboard',val.id]);
-      this.getUser.next(val);
+    this.http.post(`http://localhost:4500/authenticate/signup`,credentials,{observe:'response'})
+    .subscribe((res:HttpResponse<any>)=>{
+      console.log(`got response from server`,res);
+     if(res.status==200){
+       this.router.navigate(['/authorized/',res.body],{queryParamsHandling:'merge'});
+     }else{
+       console.log(`sorry login failed,` ,res);
+     }
     });
   };
   
-
-  logout=function(id:number){
-    let returnVal:boolean;
-    this.http.post(`http://localhost:4500/authenticate/logout`,{id:id}).subscribe((val:boolean)=>{
-      console.log(`got result from logout route`,val);
-      this.router.navigate(['/login']);
-      console.log('remaining cookies', this.cs.getAll());
-      
-    });
-    
-
-  };
 
 
 

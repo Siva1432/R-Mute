@@ -48,7 +48,7 @@ module.exports = webpackAsyncContext;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAvYXBwLmNvbXBvbmVudC5jc3MifQ== */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAvY29tcG9uZW50cy9hcHAvYXBwLmNvbXBvbmVudC5jc3MifQ== */"
 
 /***/ }),
 
@@ -97,6 +97,72 @@ var AppComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/gaurds/app.gaurd.ts":
+/*!*************************************!*\
+  !*** ./src/app/gaurds/app.gaurd.ts ***!
+  \*************************************/
+/*! exports provided: AppGaurd */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppGaurd", function() { return AppGaurd; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/index.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+
+
+
+
+
+var AppGaurd = /** @class */ (function () {
+    function AppGaurd(cs, router, http) {
+        this.cs = cs;
+        this.router = router;
+        this.http = http;
+    }
+    AppGaurd.prototype.canActivate = function (route, state) {
+        var _this = this;
+        var xsrfCookie = this.cs.get('xsrfToken');
+        console.log('got xsrfCookie :', xsrfCookie);
+        if (xsrfCookie) {
+            var httpOptions = {
+                headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpHeaders"]({
+                    'Content-Type': 'application/json'
+                }), observe: 'response',
+                withCredentials: 'true'
+            };
+            this.http.post('http://localhost:4500/authorize/getuser', httpOptions)
+                .subscribe(function (res) {
+                console.log('got response', res);
+                if (res._id) {
+                    _this.router.navigate(['/authorized/', res._id], { queryParamsHandling: 'merge' });
+                }
+                else {
+                }
+                ;
+            });
+            return false;
+        }
+        else {
+            return true;
+        }
+    };
+    AppGaurd = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [ngx_cookie_service__WEBPACK_IMPORTED_MODULE_3__["CookieService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"]])
+    ], AppGaurd);
+    return AppGaurd;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/root.module.ts":
 /*!********************************!*\
   !*** ./src/app/root.module.ts ***!
@@ -115,6 +181,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _root_routing_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./root.routing.module */ "./src/app/root.routing.module.ts");
+/* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/index.js");
+/* harmony import */ var _gaurds_app_gaurd__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./gaurds/app.gaurd */ "./src/app/gaurds/app.gaurd.ts");
+
+
 
 
 
@@ -135,6 +205,10 @@ var RootModule = /** @class */ (function () {
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__["BrowserModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"],
                 _root_routing_module__WEBPACK_IMPORTED_MODULE_7__["RootRoutingModule"]
+            ],
+            providers: [
+                ngx_cookie_service__WEBPACK_IMPORTED_MODULE_8__["CookieService"],
+                _gaurds_app_gaurd__WEBPACK_IMPORTED_MODULE_9__["AppGaurd"]
             ],
             bootstrap: [
                 _components_app_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]
@@ -162,6 +236,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _components_app_app_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/app/app.component */ "./src/app/components/app/app.component.ts");
+/* harmony import */ var _gaurds_app_gaurd__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./gaurds/app.gaurd */ "./src/app/gaurds/app.gaurd.ts");
+
 
 
 
@@ -170,11 +246,12 @@ var rootRoutes = [
     {
         path: 'authorized',
         component: _components_app_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"],
-        loadChildren: './editor-module.routing#EditorRoutingModule'
+        loadChildren: './editor-module.routing#EditorRoutingModule',
     },
     {
         path: '',
-        loadChildren: './app.routing#AppRoutingModule'
+        loadChildren: './app.routing#AppRoutingModule',
+        canActivate: [_gaurds_app_gaurd__WEBPACK_IMPORTED_MODULE_4__["AppGaurd"]]
     }
 ];
 var RootRoutingModule = /** @class */ (function () {

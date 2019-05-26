@@ -7032,7 +7032,7 @@ module.exports = yeast;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJkYXNoYm9hcmQvZGFzaGJvYXJkLmNvbXBvbmVudC5jc3MifQ== */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAvY29tcG9uZW50cy9kYXNoYm9hcmQvZGFzaGJvYXJkLmNvbXBvbmVudC5jc3MifQ== */"
 
 /***/ }),
 
@@ -7043,7 +7043,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Nav tabs -->\n<ul class=\"nav nav-tabs\" id=\"navId\">\n  <li class=\"nav-item\">\n    <a href=\"#tab1Id\" class=\"nav-link active\">Dashboard</a>\n  </li>\n  <li class=\"nav-item\">\n    <a href=\"#tab5Id\" class=\"nav-link\">Editor</a>\n  </li>\n  <li class=\"nav-item\">\n    <a (click)='logOut()' class=\"nav-link\">Logout</a>\n  </li>\n</ul>\n\n<router-outlet></router-outlet>\n<div class=\"row\">\n  <div class=\"col-sm-5\">\n    <div class=\"card\">\n      <div class=\"card-body\">\n        <h3 class=\"card-title\"><p>{{user.firstname}}</p><p>{{user.lastname}}</p></h3>\n       <div><span for= 'email'class=\"card-controll\">Email</span>\n        <p class=\"card-text\">{{user.email}}</p>\n       </div>\n      </div>\n    </div>\n  </div>\n</div>\n<table class=\"table table-striped table-inverse table-responsive\">\n  <thead class=\"thead-inverse\">\n    <tr>\n      <th>Project</th>\n    </tr>\n    </thead>\n    \n    <tbody >\n     <!-- <tr *ngIf=\"user.project.length>0\">\n        <td scope=\"row\" *ngFor=\" #project of user.projects\">\n         {{project.name}}\n        </td>\n      </tr>-->\n    </tbody>\n  \n</table>"
+module.exports = "<!-- Nav tabs -->\n<ul class=\"nav nav-tabs\" id=\"navId\">\n  <li class=\"nav-item\">\n    <a href=\"#tab1Id\" class=\"nav-link active\">Dashboard</a>\n  </li>\n  <li class=\"nav-item\">\n    <a href=\"#tab5Id\" class=\"nav-link\">Editor</a>\n  </li>\n  <li class=\"nav-item\">\n    <a (click)='logOut()' class=\"nav-link\">Logout</a>\n  </li>\n</ul>\n\n<router-outlet></router-outlet>\n<div class=\"row\">\n  <div class=\"col-sm-5\">\n    <div class=\"card\">\n      <div class=\"card-body\">\n        <h3 class=\"card-title\"><p>{{user.firstname || async}}</p><p>{{user.lastname || async}}</p></h3>\n       <div><span for= 'email'class=\"card-controll\">Email</span>\n        <p class=\"card-text\">{{user.email || async}}</p>\n       </div>\n      </div>\n    </div>\n  </div>\n</div>\n<table class=\"table table-striped table-inverse table-responsive\">\n  <thead class=\"thead-inverse\">\n    <tr>\n      <th>Project</th>\n    </tr>\n    </thead>\n    \n    <tbody >\n     <!-- <tr *ngIf=\"user.project.length>0\">\n        <td scope=\"row\" *ngFor=\" #project of user.projects\">\n         {{project.name}}\n        </td>\n      </tr>-->\n    </tbody>\n  \n</table>"
 
 /***/ }),
 
@@ -7059,26 +7059,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DashboardComponent", function() { return DashboardComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
-/* harmony import */ var src_app_services_gaurd_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/gaurd.service */ "./src/app/services/gaurd.service.ts");
-
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 
 
 
 var DashboardComponent = /** @class */ (function () {
-    function DashboardComponent(userService, gaurdService) {
-        this.userService = userService;
-        this.gaurdService = gaurdService;
-        this.logOut = function () {
-            console.log('logging out user');
-            this.userService.logout(this.user.id);
-        };
+    function DashboardComponent(route) {
+        this.route = route;
     }
     DashboardComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.getUserSubscriber = this.userService.getUser.subscribe(function (newUser) {
-            console.log("updating user");
-            _this.user = newUser;
+        //  this.getUserSubscriber=this.userService.getUser.subscribe((newUser:User)=>{
+        //   console.log(`updating user`);
+        //   this.user= newUser;
+        // });
+        this.route.data.subscribe(function (data) {
+            console.log("got user from resolver in dashboard", data);
+            _this.user = data.user;
         });
     };
     DashboardComponent.prototype.ngOnDestroy = function () {
@@ -7090,7 +7087,7 @@ var DashboardComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./dashboard.component.html */ "./src/app/components/dashboard/dashboard.component.html"),
             styles: [__webpack_require__(/*! ./dashboard.component.css */ "./src/app/components/dashboard/dashboard.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_2__["HttpService"], src_app_services_gaurd_service__WEBPACK_IMPORTED_MODULE_3__["GaurdService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
     ], DashboardComponent);
     return DashboardComponent;
 }());
@@ -7107,7 +7104,7 @@ var DashboardComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJlZGl0b3Itcm9vdC9lZGl0b3Itcm9vdC5jb21wb25lbnQuY3NzIn0= */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAvY29tcG9uZW50cy9lZGl0b3Itcm9vdC9lZGl0b3Itcm9vdC5jb21wb25lbnQuY3NzIn0= */"
 
 /***/ }),
 
@@ -7118,7 +7115,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  editor-root works!\n</p>\n"
+module.exports = "<nav class=\"navbar navbar-expand-lg navbar-light bg-light fixed-top\">\n    <a class=\"navbar-brand\" href=\"#\">R_Mute</a>\n    <div class=\"collapse navbar-collapse\" id=\"collapsibleNavId\">\n      <ul class=\"navbar-nav mr-auto mt-2 mt-lg-0\">\n        <li class=\"nav-item active\">\n          <a class=\"nav-link\" routerLink=\"./dashboard\">Dashboard </a>\n        </li>\n        <li class=\"nav-item\">\n          <a class=\"nav-link\" routerLink=\"./editor\">Editor</a>\n        </li>\n        <li class=\"nav-item\">\n          <a class=\"nav-link\" (click)='logout()'>logout</a>\n        </li>\n        <li class=\"nav-item dropdown\">\n          <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"dropdownId\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Dropdown</a>\n          <div class=\"dropdown-menu\" aria-labelledby=\"dropdownId\">\n            <a class=\"dropdown-item\" href=\"#\">Action 1</a>\n            <a class=\"dropdown-item\" href=\"#\">Action 2</a>\n          </div>\n        </li>\n      </ul>\n    \n    </div>\n  </nav>\n  <div class=\"container-fluid\">\n    <router-outlet></router-outlet>\n  </div>"
 
 /***/ }),
 
@@ -7134,20 +7131,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EditorRootComponent", function() { return EditorRootComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var src_app_services_user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/user.service */ "./src/app/services/user.service.ts");
+
 
 
 var EditorRootComponent = /** @class */ (function () {
-    function EditorRootComponent() {
+    function EditorRootComponent(userService) {
+        var _this = this;
+        this.userService = userService;
+        this.logout = function () {
+            _this.userService.logout();
+        };
     }
     EditorRootComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.userService.getCurrentUser();
+        this.userService.getUser.subscribe(function (user) {
+            console.log('got user', user);
+            _this.user = user;
+        });
     };
+    ;
     EditorRootComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-editor-root',
             template: __webpack_require__(/*! ./editor-root.component.html */ "./src/app/components/editor-root/editor-root.component.html"),
             styles: [__webpack_require__(/*! ./editor-root.component.css */ "./src/app/components/editor-root/editor-root.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"]])
     ], EditorRootComponent);
     return EditorRootComponent;
 }());
@@ -7163,7 +7174,7 @@ var EditorRootComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "textarea{\r\n    width:70%;\r\n    height:600px;\r\n    background-color: black;\r\n    color:white;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImVkaXRvci9lZGl0b3IuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLFNBQVM7SUFDVCxZQUFZO0lBQ1osdUJBQXVCO0lBQ3ZCLFdBQVc7QUFDZiIsImZpbGUiOiJlZGl0b3IvZWRpdG9yLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJ0ZXh0YXJlYXtcclxuICAgIHdpZHRoOjcwJTtcclxuICAgIGhlaWdodDo2MDBweDtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IGJsYWNrO1xyXG4gICAgY29sb3I6d2hpdGU7XHJcbn1cclxuIl19 */"
+module.exports = "textarea{\r\n    width:70%;\r\n    height:600px;\r\n    background-color: black;\r\n    color:white;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9jb21wb25lbnRzL2VkaXRvci9lZGl0b3IuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLFNBQVM7SUFDVCxZQUFZO0lBQ1osdUJBQXVCO0lBQ3ZCLFdBQVc7QUFDZiIsImZpbGUiOiJhcHAvY29tcG9uZW50cy9lZGl0b3IvZWRpdG9yLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJ0ZXh0YXJlYXtcclxuICAgIHdpZHRoOjcwJTtcclxuICAgIGhlaWdodDo2MDBweDtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IGJsYWNrO1xyXG4gICAgY29sb3I6d2hpdGU7XHJcbn1cclxuIl19 */"
 
 /***/ }),
 
@@ -7309,7 +7320,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 /* harmony import */ var _services_paths__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./services/paths */ "./src/app/services/paths.ts");
 /* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/index.js");
-/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./services/user.service */ "./src/app/services/user.service.ts");
+/* harmony import */ var _resolvers_dashboard_resolver__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./resolvers/dashboard.resolver */ "./src/app/resolvers/dashboard.resolver.ts");
+
 
 
 
@@ -7330,22 +7343,32 @@ __webpack_require__.r(__webpack_exports__);
 
 var secureRoutes = [
     {
-        path: '',
+        path: ':id',
         component: _components_editor_root_editor_root_component__WEBPACK_IMPORTED_MODULE_13__["EditorRootComponent"],
         children: [
             { path: 'editor',
                 canActivate: [_gaurds_canActivate__WEBPACK_IMPORTED_MODULE_10__["AuthGaurd"]],
+                component: _components_editor_editor_component__WEBPACK_IMPORTED_MODULE_1__["EditorComponent"],
                 children: [
                     { path: ':id',
-                        component: _components_editor_editor_component__WEBPACK_IMPORTED_MODULE_1__["EditorComponent"] }
+                    }
                 ]
             },
             {
-                path: 'dashboard/:id',
+                path: '',
                 component: _components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_4__["DashboardComponent"],
-                canActivate: [_gaurds_canActivate__WEBPACK_IMPORTED_MODULE_10__["AuthGaurd"]]
+                canActivate: [_gaurds_canActivate__WEBPACK_IMPORTED_MODULE_10__["AuthGaurd"]],
+                resolve: { user: _resolvers_dashboard_resolver__WEBPACK_IMPORTED_MODULE_18__["DashboardResolver"] }
             },
-        ]
+            {
+                path: '**',
+                redirectTo: './'
+            }
+        ],
+    },
+    {
+        path: '**',
+        redirectTo: ':id'
     }
 ];
 var EditorRoutingModule = /** @class */ (function () {
@@ -7377,7 +7400,8 @@ var EditorRoutingModule = /** @class */ (function () {
                 _services_gaurd_service__WEBPACK_IMPORTED_MODULE_12__["GaurdService"],
                 _services_paths__WEBPACK_IMPORTED_MODULE_15__["Paths"],
                 ngx_cookie_service__WEBPACK_IMPORTED_MODULE_16__["CookieService"],
-                _services_auth_service__WEBPACK_IMPORTED_MODULE_17__["HttpService"]
+                _services_user_service__WEBPACK_IMPORTED_MODULE_17__["UserService"],
+                _resolvers_dashboard_resolver__WEBPACK_IMPORTED_MODULE_18__["DashboardResolver"]
             ],
             exports: [
                 _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]
@@ -7421,24 +7445,23 @@ var AuthGaurd = /** @class */ (function () {
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log('query params:', active.params);
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
+                        _a.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, this.authService.authorized()];
-                    case 2:
+                    case 1:
                         returnStatus = _a.sent();
-                        console.log("returning status:" + returnStatus);
+                        if (returnStatus == false) {
+                            this.router.navigate(['/login']);
+                        }
                         return [2 /*return*/, returnStatus];
-                    case 3:
+                    case 2:
                         err_1 = _a.sent();
-                        console.log("got error after here", err_1);
-                        return [3 /*break*/, 4];
-                    case 4: return [2 /*return*/];
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
                 }
             });
         });
     };
+    ;
     AuthGaurd = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injector"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
@@ -7486,6 +7509,43 @@ var HttpInterceptorService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/resolvers/dashboard.resolver.ts":
+/*!*************************************************!*\
+  !*** ./src/app/resolvers/dashboard.resolver.ts ***!
+  \*************************************************/
+/*! exports provided: DashboardResolver */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DashboardResolver", function() { return DashboardResolver; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _services_paths__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/paths */ "./src/app/services/paths.ts");
+
+
+
+
+var DashboardResolver = /** @class */ (function () {
+    function DashboardResolver(http, paths) {
+        this.http = http;
+        this.paths = paths;
+    }
+    DashboardResolver.prototype.resolve = function (route, state) {
+        return this.http.get('http://localhost:4500/authorize/getuser', { observe: 'body' });
+    };
+    DashboardResolver = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _services_paths__WEBPACK_IMPORTED_MODULE_3__["Paths"]])
+    ], DashboardResolver);
+    return DashboardResolver;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/services/gaurd.service.ts":
 /*!*******************************************!*\
   !*** ./src/app/services/gaurd.service.ts ***!
@@ -7501,9 +7561,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _paths__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./paths */ "./src/app/services/paths.ts");
 /* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/index.js");
-/* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./auth.service */ "./src/app/services/auth.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 
 
 
@@ -7511,65 +7569,46 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var GaurdService = /** @class */ (function () {
-    function GaurdService(http, paths, cs, router, injector, route) {
-        var _this = this;
+    function GaurdService(http, paths, cs, router, route) {
         this.http = http;
         this.paths = paths;
         this.cs = cs;
         this.router = router;
-        this.injector = injector;
         this.route = route;
-        this.authService = this.injector.get(_auth_service__WEBPACK_IMPORTED_MODULE_5__["HttpService"]);
-        this.userSubscription = this.authService.getUser.subscribe(function (newUser) {
-            console.log("updating user", newUser);
-            _this.user = newUser;
-        });
         this.authorized = function () {
+            // (id && id!=='.:id')?console.log('got id:',id):id=this.user._id;
             try {
                 var xsrfCookies = this.cs.getAll();
                 console.log("xsrf-token :", xsrfCookies);
                 var http_1 = this.http;
                 var paths_1 = this.paths;
-                var router = this.router;
-                var id_1 = this.user.id;
                 return new Promise(function (resolve, reject) {
-                    if (id_1) {
-                        console.log("got error in here");
-                        console.log('User id :', id_1);
-                        http_1.post(paths_1.endPoints.isValid, { id: id_1 }).subscribe(function (res) {
-                            console.log("got is valid res", res);
-                            if (res) {
-                                resolve(res);
-                            }
-                            else {
-                                resolve(res);
-                            }
-                        });
-                    }
-                    else {
-                        resolve(false);
-                        console.log("got error at here in reject");
-                    }
-                    ;
+                    http_1.post(paths_1.endPoints.isValid, { observe: 'response' })
+                        .subscribe(function (res) {
+                        console.log("got is valid res", res);
+                        if (res) {
+                            resolve(true);
+                        }
+                        else {
+                            resolve(false);
+                        }
+                    });
                 });
             }
             catch (err) {
                 console.log("error :", err);
             }
+            ;
         };
     }
     ;
-    GaurdService.prototype.ngOnDestroy = function () {
-        this.userSubscription.unsubscribe();
-    };
     GaurdService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"],
             _paths__WEBPACK_IMPORTED_MODULE_3__["Paths"],
             ngx_cookie_service__WEBPACK_IMPORTED_MODULE_4__["CookieService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"],
-            _angular_core__WEBPACK_IMPORTED_MODULE_1__["Injector"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_6__["ActivatedRoute"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"]])
     ], GaurdService);
     return GaurdService;
 }());
@@ -7899,6 +7938,66 @@ var TextService = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_socket_service__WEBPACK_IMPORTED_MODULE_3__["SocketService"]])
     ], TextService);
     return TextService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/user.service.ts":
+/*!******************************************!*\
+  !*** ./src/app/services/user.service.ts ***!
+  \******************************************/
+/*! exports provided: UserService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserService", function() { return UserService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _paths__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./paths */ "./src/app/services/paths.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/index.js");
+
+
+
+
+
+
+
+var UserService = /** @class */ (function () {
+    function UserService(http, paths, router, cs) {
+        this.http = http;
+        this.paths = paths;
+        this.router = router;
+        this.cs = cs;
+        this.getUser = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
+        this.getCurrentUser = function () {
+            var _this = this;
+            console.log('getUser end point:', this.paths.endPoints.getUser);
+            this.http.post(this.paths.endPoints.getUser).subscribe(function (res) {
+                console.log("got response in getUser function :", res);
+                _this.user = res;
+                _this.getUser.next(res);
+            });
+        };
+        this.logout = function () {
+            var _this = this;
+            this.http.post(this.paths.endPoints.logOut).subscribe(function (val) {
+                console.log("got result from logout route", val);
+                _this.router.navigate(['/login']);
+                console.log('remaining cookies', _this.cs.getAll());
+            });
+        };
+    }
+    UserService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _paths__WEBPACK_IMPORTED_MODULE_4__["Paths"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"], ngx_cookie_service__WEBPACK_IMPORTED_MODULE_6__["CookieService"]])
+    ], UserService);
+    return UserService;
 }());
 
 

@@ -1,5 +1,5 @@
 import { EditorComponent } from './components/editor/editor.component';
-import { Routes,RouterModule } from '@angular/router';
+import { Routes,RouterModule, Router } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SocketService } from './services/socket.service';
@@ -14,27 +14,39 @@ import { EditorRootComponent } from './components/editor-root/editor-root.compon
 import { CommonModule } from '@angular/common';
 import { Paths } from './services/paths';
 import { CookieService } from 'ngx-cookie-service';
-import { HttpService } from './services/auth.service';
+import { UserService } from './services/user.service';
+import { DashboardResolver } from './resolvers/dashboard.resolver';
 
 const secureRoutes: Routes = [
   {
-    path:'',
+    path:':id',
     component:EditorRootComponent,
     children:[
               { path: 'editor',
               canActivate:[AuthGaurd],
+              component: EditorComponent,
               children:[
                 {path:':id',
-                component: EditorComponent}
+                }
               ]
             },
             {
-                path:'dashboard/:id',
+                path:'',
                 component:DashboardComponent,
-                canActivate:[AuthGaurd]
+                canActivate:[AuthGaurd],
+                resolve:{user:DashboardResolver}
             },
+            {
+              path:'**',
+              redirectTo:'./'
+            }
           
-    ]
+    ],
+  },
+  {
+    path:'**',
+    redirectTo:':id'
+    
   }
    
   ];
@@ -64,7 +76,8 @@ const secureRoutes: Routes = [
         GaurdService,
         Paths,
         CookieService,
-        HttpService
+        UserService,
+        DashboardResolver
     ],
     exports: [
       RouterModule

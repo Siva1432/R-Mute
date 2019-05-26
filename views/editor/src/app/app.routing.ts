@@ -39,7 +39,7 @@ const appRoutes: Routes = [
       },
       {
         path:'**',
-        component:HomeComponent
+        redirectTo:'/home'
     }
     ]
   },
