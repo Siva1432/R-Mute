@@ -204,7 +204,7 @@ var RootModule = /** @class */ (function () {
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"],
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__["BrowserModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"],
-                _root_routing_module__WEBPACK_IMPORTED_MODULE_7__["RootRoutingModule"]
+                _root_routing_module__WEBPACK_IMPORTED_MODULE_7__["RootRoutingModule"],
             ],
             providers: [
                 ngx_cookie_service__WEBPACK_IMPORTED_MODULE_8__["CookieService"],

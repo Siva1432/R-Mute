@@ -7,7 +7,7 @@ import { Paths } from '../services/paths';
 
 
 @Injectable ()
-export class DashboardResolver implements Resolve<User> {
+export class UserResolver implements Resolve<User> {
 constructor( private http:HttpClient, private paths:Paths){
 
 }

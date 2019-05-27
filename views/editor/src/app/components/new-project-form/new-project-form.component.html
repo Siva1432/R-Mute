@@ -1,0 +1,24 @@
+<div class="container form-wrapper">
+    <form [formGroup]="newProjectForm" (ngSubmit)='createNewProject()'>
+    <div class="form-group row">
+        <label>
+            Project Title:
+            <input type="text" required formControlName="title">
+          </label>
+        
+    </div>
+    <div class="form-group row">
+        
+        <label>
+            Project Description:
+            <textarea type="text" formControlName="description"></textarea>
+          </label>
+      </div>
+    <div class="form-group row">
+      <div class="offset-sm-2 col-sm-10">
+          <button type="submit" [disabled]="!newProjectForm.valid">Create</button>
+      </div>
+    </div>
+  </form>
+</div>
+

@@ -8,6 +8,7 @@ const cors =require('cors');
 const userRouter = require('./routes/users.router')(io,app);
 const userAuth =require(`./routes/authenticate`)(cors);
 const authorisationRouter = require('./routes/authorize')();
+const projectRouter=require(`./routes/project.routing`)();
 app.use(express.static(`./views/editor/dist/editor`));
 const setCORSHeaders= function(req,res,next){
     res.setHeader('Access-Control-Allow-Origin',`${req.headers.origin}`);
@@ -35,6 +36,7 @@ app.use(cors({
 app.use(cookieParser())
 app.use('/',bp.json());
 app.use('/',bp.urlencoded({extended:true}));
+app.use('/project',projectRouter);
 app.use('/authorize',authorisationRouter);
 app.use('/authenticate',userAuth);
 app.use('/',userRouter);

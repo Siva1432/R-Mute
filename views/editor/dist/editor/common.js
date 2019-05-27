@@ -17,7 +17,8 @@ var Paths = /** @class */ (function () {
             isValid: this.origin + 'authorize/isvalid',
             getRole: this.origin + 'authorize/role',
             getUser: this.origin + 'authorize/getuser',
-            logOut: this.origin + 'authenticate/logout'
+            logOut: this.origin + 'authenticate/logout',
+            createNewProject: this.origin + 'project/new'
         };
     }
     return Paths;

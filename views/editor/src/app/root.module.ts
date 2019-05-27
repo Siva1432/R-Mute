@@ -8,6 +8,7 @@ import { RootRoutingModule } from './root.routing.module';
 import { CookieService } from 'ngx-cookie-service';
 import { AppGaurd } from './gaurds/app.gaurd';
 
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -15,7 +16,7 @@ import { AppGaurd } from './gaurds/app.gaurd';
   HttpClientModule,
   BrowserModule,
   FormsModule,
-  RootRoutingModule
+  RootRoutingModule,
   ],
   providers:[
     CookieService,

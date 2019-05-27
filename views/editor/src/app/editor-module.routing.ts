@@ -1,5 +1,5 @@
 import { EditorComponent } from './components/editor/editor.component';
-import { Routes,RouterModule, Router } from '@angular/router';
+import { Routes,RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SocketService } from './services/socket.service';
@@ -15,13 +15,24 @@ import { CommonModule } from '@angular/common';
 import { Paths } from './services/paths';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from './services/user.service';
-import { DashboardResolver } from './resolvers/dashboard.resolver';
+import { UserResolver } from './resolvers/user.resolver';
+import { NewProjectFormComponent } from './components/new-project-form/new-project-form.component';
+import { NewProjectFormGaurd } from './gaurds/deactivate.gaurd';
+import { ProjectService } from './services/project.service';
 
 const secureRoutes: Routes = [
   {
     path:':id',
     component:EditorRootComponent,
-    children:[
+    resolve:{user:UserResolver},
+    canActivate:[AuthGaurd],
+    children:[ 
+              {
+                path:'createproject',
+                component:NewProjectFormComponent,
+                canActivate:[AuthGaurd],
+                canDeactivate:[NewProjectFormGaurd]
+              },
               { path: 'editor',
               canActivate:[AuthGaurd],
               component: EditorComponent,
@@ -33,8 +44,8 @@ const secureRoutes: Routes = [
             {
                 path:'',
                 component:DashboardComponent,
-                canActivate:[AuthGaurd],
-                resolve:{user:DashboardResolver}
+                canActivate:[AuthGaurd]
+                
             },
             {
               path:'**',
@@ -62,6 +73,7 @@ const secureRoutes: Routes = [
         EditorComponent,
         DashboardComponent,
         EditorRootComponent,
+        NewProjectFormComponent
         
     ],
     providers:[
@@ -77,7 +89,9 @@ const secureRoutes: Routes = [
         Paths,
         CookieService,
         UserService,
-        DashboardResolver
+        UserResolver,
+        NewProjectFormGaurd,
+        ProjectService
     ],
     exports: [
       RouterModule

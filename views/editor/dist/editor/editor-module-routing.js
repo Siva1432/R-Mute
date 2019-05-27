@@ -7043,7 +7043,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Nav tabs -->\n<ul class=\"nav nav-tabs\" id=\"navId\">\n  <li class=\"nav-item\">\n    <a href=\"#tab1Id\" class=\"nav-link active\">Dashboard</a>\n  </li>\n  <li class=\"nav-item\">\n    <a href=\"#tab5Id\" class=\"nav-link\">Editor</a>\n  </li>\n  <li class=\"nav-item\">\n    <a (click)='logOut()' class=\"nav-link\">Logout</a>\n  </li>\n</ul>\n\n<router-outlet></router-outlet>\n<div class=\"row\">\n  <div class=\"col-sm-5\">\n    <div class=\"card\">\n      <div class=\"card-body\">\n        <h3 class=\"card-title\"><p>{{user.firstname || async}}</p><p>{{user.lastname || async}}</p></h3>\n       <div><span for= 'email'class=\"card-controll\">Email</span>\n        <p class=\"card-text\">{{user.email || async}}</p>\n       </div>\n      </div>\n    </div>\n  </div>\n</div>\n<table class=\"table table-striped table-inverse table-responsive\">\n  <thead class=\"thead-inverse\">\n    <tr>\n      <th>Project</th>\n    </tr>\n    </thead>\n    \n    <tbody >\n     <!-- <tr *ngIf=\"user.project.length>0\">\n        <td scope=\"row\" *ngFor=\" #project of user.projects\">\n         {{project.name}}\n        </td>\n      </tr>-->\n    </tbody>\n  \n</table>"
+module.exports = "<!-- Nav tabs -->\n<ul class=\"nav nav-tabs\" id=\"navId\">\n  <li class=\"nav-item\">\n    <a href=\"#tab1Id\" class=\"nav-link active\">Dashboard</a>\n  </li>\n  <li class=\"nav-item\">\n    <a href=\"#tab5Id\" class=\"nav-link\">Editor</a>\n  </li>\n</ul>\n\n<router-outlet></router-outlet>\n<div class=\"row\">\n  <div class=\"col-sm-5\">\n    <div class=\"card\">\n      <div class=\"card-body\">\n        <h3 class=\"card-title\"><p>{{user.firstname || async}}</p><p>{{user.lastname || async}}</p></h3>\n       <div><span for= 'email'class=\"card-controll\">Email</span>\n        <p class=\"card-text\">{{user.email || async}}</p>\n       </div>\n      </div>\n    </div>\n  </div>\n</div>\n<div class=\"container-fluid project-display-wrapper\">\n  <div class=\"container\">\n    <ul class=\"nav justify-content-center\">\n        <li class=\"nav-brand\">\n            <h3>Projects</h3>\n        </li>\n        <li class=\"nav-item\">\n            <input name=\"createProjectButton\" routerLink=\"./createproject\" id=\"createProjectButton\" class=\"btn btn-primary\" type=\"button\" value=\"Create New Project\">\n        </li>\n        \n    </ul>\n    <h3>Your Projects</h3>\n  </div>\n    <table class=\"table table-striped table-inverse table-responsive\">\n        <thead class=\"thead-inverse\">\n          <tr>\n            <th>Projects</th>\n          </tr>\n          </thead>\n          \n          <tbody >\n           <!-- <tr *ngIf=\"user.project.length>0\">\n              <td scope=\"row\" *ngFor=\" #project of user.projects\">\n               {{project.name}}\n              </td>\n            </tr>-->\n          </tbody>\n        \n      </table>\n</div>\n"
 
 /***/ }),
 
@@ -7064,8 +7064,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var DashboardComponent = /** @class */ (function () {
-    function DashboardComponent(route) {
+    function DashboardComponent(route, router) {
         this.route = route;
+        this.router = router;
     }
     DashboardComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -7078,16 +7079,13 @@ var DashboardComponent = /** @class */ (function () {
             _this.user = data.user;
         });
     };
-    DashboardComponent.prototype.ngOnDestroy = function () {
-        this.getUserSubscriber.unsubscribe();
-    };
     DashboardComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-dashboard',
             template: __webpack_require__(/*! ./dashboard.component.html */ "./src/app/components/dashboard/dashboard.component.html"),
             styles: [__webpack_require__(/*! ./dashboard.component.css */ "./src/app/components/dashboard/dashboard.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
     ], DashboardComponent);
     return DashboardComponent;
 }());
@@ -7115,7 +7113,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg navbar-light bg-light fixed-top\">\n    <a class=\"navbar-brand\" href=\"#\">R_Mute</a>\n    <div class=\"collapse navbar-collapse\" id=\"collapsibleNavId\">\n      <ul class=\"navbar-nav mr-auto mt-2 mt-lg-0\">\n        <li class=\"nav-item active\">\n          <a class=\"nav-link\" routerLink=\"./dashboard\">Dashboard </a>\n        </li>\n        <li class=\"nav-item\">\n          <a class=\"nav-link\" routerLink=\"./editor\">Editor</a>\n        </li>\n        <li class=\"nav-item\">\n          <a class=\"nav-link\" (click)='logout()'>logout</a>\n        </li>\n        <li class=\"nav-item dropdown\">\n          <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"dropdownId\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Dropdown</a>\n          <div class=\"dropdown-menu\" aria-labelledby=\"dropdownId\">\n            <a class=\"dropdown-item\" href=\"#\">Action 1</a>\n            <a class=\"dropdown-item\" href=\"#\">Action 2</a>\n          </div>\n        </li>\n      </ul>\n    \n    </div>\n  </nav>\n  <div class=\"container-fluid\">\n    <router-outlet></router-outlet>\n  </div>"
+module.exports = "<nav class=\"navbar navbar-expand-lg navbar-light bg-light fixed-top\">\n    <a class=\"navbar-brand\" href=\"#\">R_Mute</a>\n    <div class=\"collapse navbar-collapse\" id=\"collapsibleNavId\">\n      <ul class=\"navbar-nav mr-auto mt-2 mt-lg-0\">\n        <li class=\"nav-item active\">\n          <a class=\"nav-link\" routerLink=\"./dashboard\">Dashboard </a>\n        </li>\n        <li class=\"nav-item\">\n          <a class=\"nav-link\" routerLink=\"./editor\">Editor</a>\n        </li>\n        <li class=\"nav-item\">\n          <a (click)='logOut()' class=\"nav-link\">Logout</a>\n        </li>\n        <li class=\"nav-item dropdown\">\n          <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"dropdownId\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Dropdown</a>\n          <div class=\"dropdown-menu\" aria-labelledby=\"dropdownId\">\n            <a class=\"dropdown-item\" href=\"#\">Action 1</a>\n            <a class=\"dropdown-item\" href=\"#\">Action 2</a>\n          </div>\n        </li>\n      </ul>\n    \n    </div>\n  </nav>\n  <div class=\"container-fluid\">\n    <router-outlet></router-outlet>\n  </div>"
 
 /***/ }),
 
@@ -7132,23 +7130,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var src_app_services_user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/user.service */ "./src/app/services/user.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
 
 
 
 var EditorRootComponent = /** @class */ (function () {
-    function EditorRootComponent(userService) {
+    function EditorRootComponent(userService, route) {
         var _this = this;
         this.userService = userService;
+        this.route = route;
         this.logout = function () {
             _this.userService.logout();
         };
     }
     EditorRootComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.userService.getCurrentUser();
-        this.userService.getUser.subscribe(function (user) {
-            console.log('got user', user);
-            _this.user = user;
+        // this.userService.getCurrentUser();
+        // this.userService.getUser.subscribe((user:User)=>{
+        //   console.log('got user',user)
+        //   this.user=user;
+        // });
+        this.route.data.subscribe(function (data) {
+            console.log("got user from resolver in dashboard", data);
+            _this.user = data.user;
         });
     };
     ;
@@ -7158,7 +7163,7 @@ var EditorRootComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./editor-root.component.html */ "./src/app/components/editor-root/editor-root.component.html"),
             styles: [__webpack_require__(/*! ./editor-root.component.css */ "./src/app/components/editor-root/editor-root.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]])
     ], EditorRootComponent);
     return EditorRootComponent;
 }());
@@ -7293,6 +7298,77 @@ var EditorComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/components/new-project-form/new-project-form.component.css":
+/*!****************************************************************************!*\
+  !*** ./src/app/components/new-project-form/new-project-form.component.css ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".form-wrapper{\r\n    margin-top: 100px;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9jb21wb25lbnRzL25ldy1wcm9qZWN0LWZvcm0vbmV3LXByb2plY3QtZm9ybS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksaUJBQWlCO0FBQ3JCIiwiZmlsZSI6ImFwcC9jb21wb25lbnRzL25ldy1wcm9qZWN0LWZvcm0vbmV3LXByb2plY3QtZm9ybS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmZvcm0td3JhcHBlcntcclxuICAgIG1hcmdpbi10b3A6IDEwMHB4O1xyXG59Il19 */"
+
+/***/ }),
+
+/***/ "./src/app/components/new-project-form/new-project-form.component.html":
+/*!*****************************************************************************!*\
+  !*** ./src/app/components/new-project-form/new-project-form.component.html ***!
+  \*****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container form-wrapper\">\n    <form [formGroup]=\"newProjectForm\" (ngSubmit)='createNewProject()'>\n    <div class=\"form-group row\">\n        <label>\n            Project Title:\n            <input type=\"text\" required formControlName=\"title\">\n          </label>\n        \n    </div>\n    <div class=\"form-group row\">\n        \n        <label>\n            Project Description:\n            <textarea type=\"text\" formControlName=\"description\"></textarea>\n          </label>\n      </div>\n    <div class=\"form-group row\">\n      <div class=\"offset-sm-2 col-sm-10\">\n          <button type=\"submit\" [disabled]=\"!newProjectForm.valid\">Create</button>\n      </div>\n    </div>\n  </form>\n</div>\n\n"
+
+/***/ }),
+
+/***/ "./src/app/components/new-project-form/new-project-form.component.ts":
+/*!***************************************************************************!*\
+  !*** ./src/app/components/new-project-form/new-project-form.component.ts ***!
+  \***************************************************************************/
+/*! exports provided: NewProjectFormComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NewProjectFormComponent", function() { return NewProjectFormComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var src_app_services_project_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/project.service */ "./src/app/services/project.service.ts");
+
+
+
+
+var NewProjectFormComponent = /** @class */ (function () {
+    //@Input('newProjectForm') public newProjectForm:NgForm;
+    function NewProjectFormComponent(projectService) {
+        this.projectService = projectService;
+        this.newProjectForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
+            title: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
+            description: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('')
+        });
+        this.createNewProject = function () {
+            this.newProjectForm.submitted = true;
+            console.log("new project create form submitted:", this.newProjectForm);
+            this.projectService.createNewProject(this.newProjectForm.value);
+        };
+    }
+    NewProjectFormComponent.prototype.ngOnInit = function () {
+    };
+    NewProjectFormComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-new-project-form',
+            template: __webpack_require__(/*! ./new-project-form.component.html */ "./src/app/components/new-project-form/new-project-form.component.html"),
+            styles: [__webpack_require__(/*! ./new-project-form.component.css */ "./src/app/components/new-project-form/new-project-form.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_project_service__WEBPACK_IMPORTED_MODULE_3__["ProjectService"]])
+    ], NewProjectFormComponent);
+    return NewProjectFormComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/editor-module.routing.ts":
 /*!******************************************!*\
   !*** ./src/app/editor-module.routing.ts ***!
@@ -7321,7 +7397,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_paths__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./services/paths */ "./src/app/services/paths.ts");
 /* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/index.js");
 /* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./services/user.service */ "./src/app/services/user.service.ts");
-/* harmony import */ var _resolvers_dashboard_resolver__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./resolvers/dashboard.resolver */ "./src/app/resolvers/dashboard.resolver.ts");
+/* harmony import */ var _resolvers_user_resolver__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./resolvers/user.resolver */ "./src/app/resolvers/user.resolver.ts");
+/* harmony import */ var _components_new_project_form_new_project_form_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/new-project-form/new-project-form.component */ "./src/app/components/new-project-form/new-project-form.component.ts");
+/* harmony import */ var _gaurds_deactivate_gaurd__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./gaurds/deactivate.gaurd */ "./src/app/gaurds/deactivate.gaurd.ts");
+/* harmony import */ var _services_project_service__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./services/project.service */ "./src/app/services/project.service.ts");
+
+
+
 
 
 
@@ -7345,7 +7427,15 @@ var secureRoutes = [
     {
         path: ':id',
         component: _components_editor_root_editor_root_component__WEBPACK_IMPORTED_MODULE_13__["EditorRootComponent"],
+        resolve: { user: _resolvers_user_resolver__WEBPACK_IMPORTED_MODULE_18__["UserResolver"] },
+        canActivate: [_gaurds_canActivate__WEBPACK_IMPORTED_MODULE_10__["AuthGaurd"]],
         children: [
+            {
+                path: 'createproject',
+                component: _components_new_project_form_new_project_form_component__WEBPACK_IMPORTED_MODULE_19__["NewProjectFormComponent"],
+                canActivate: [_gaurds_canActivate__WEBPACK_IMPORTED_MODULE_10__["AuthGaurd"]],
+                canDeactivate: [_gaurds_deactivate_gaurd__WEBPACK_IMPORTED_MODULE_20__["NewProjectFormGaurd"]]
+            },
             { path: 'editor',
                 canActivate: [_gaurds_canActivate__WEBPACK_IMPORTED_MODULE_10__["AuthGaurd"]],
                 component: _components_editor_editor_component__WEBPACK_IMPORTED_MODULE_1__["EditorComponent"],
@@ -7357,8 +7447,7 @@ var secureRoutes = [
             {
                 path: '',
                 component: _components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_4__["DashboardComponent"],
-                canActivate: [_gaurds_canActivate__WEBPACK_IMPORTED_MODULE_10__["AuthGaurd"]],
-                resolve: { user: _resolvers_dashboard_resolver__WEBPACK_IMPORTED_MODULE_18__["DashboardResolver"] }
+                canActivate: [_gaurds_canActivate__WEBPACK_IMPORTED_MODULE_10__["AuthGaurd"]]
             },
             {
                 path: '**',
@@ -7387,6 +7476,7 @@ var EditorRoutingModule = /** @class */ (function () {
                 _components_editor_editor_component__WEBPACK_IMPORTED_MODULE_1__["EditorComponent"],
                 _components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_4__["DashboardComponent"],
                 _components_editor_root_editor_root_component__WEBPACK_IMPORTED_MODULE_13__["EditorRootComponent"],
+                _components_new_project_form_new_project_form_component__WEBPACK_IMPORTED_MODULE_19__["NewProjectFormComponent"]
             ],
             providers: [
                 _services_socket_service__WEBPACK_IMPORTED_MODULE_5__["SocketService"],
@@ -7401,7 +7491,9 @@ var EditorRoutingModule = /** @class */ (function () {
                 _services_paths__WEBPACK_IMPORTED_MODULE_15__["Paths"],
                 ngx_cookie_service__WEBPACK_IMPORTED_MODULE_16__["CookieService"],
                 _services_user_service__WEBPACK_IMPORTED_MODULE_17__["UserService"],
-                _resolvers_dashboard_resolver__WEBPACK_IMPORTED_MODULE_18__["DashboardResolver"]
+                _resolvers_user_resolver__WEBPACK_IMPORTED_MODULE_18__["UserResolver"],
+                _gaurds_deactivate_gaurd__WEBPACK_IMPORTED_MODULE_20__["NewProjectFormGaurd"],
+                _services_project_service__WEBPACK_IMPORTED_MODULE_21__["ProjectService"]
             ],
             exports: [
                 _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]
@@ -7473,6 +7565,47 @@ var AuthGaurd = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/gaurds/deactivate.gaurd.ts":
+/*!********************************************!*\
+  !*** ./src/app/gaurds/deactivate.gaurd.ts ***!
+  \********************************************/
+/*! exports provided: NewProjectFormGaurd */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NewProjectFormGaurd", function() { return NewProjectFormGaurd; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var NewProjectFormGaurd = /** @class */ (function () {
+    function NewProjectFormGaurd() {
+    }
+    NewProjectFormGaurd.prototype.canDeactivate = function (component, currentRoute, currentState, nextState) {
+        if (component.newProjectForm.dirty) {
+            console.log("new project form :", component.newProjectForm);
+            var warn = prompt('You will loose your enterd values. Do you wish to continue');
+            if (warn) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    };
+    NewProjectFormGaurd = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], NewProjectFormGaurd);
+    return NewProjectFormGaurd;
+}());
+
+;
+
+
+/***/ }),
+
 /***/ "./src/app/gaurds/http-interseptor.service.ts":
 /*!****************************************************!*\
   !*** ./src/app/gaurds/http-interseptor.service.ts ***!
@@ -7509,16 +7642,16 @@ var HttpInterceptorService = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/resolvers/dashboard.resolver.ts":
-/*!*************************************************!*\
-  !*** ./src/app/resolvers/dashboard.resolver.ts ***!
-  \*************************************************/
-/*! exports provided: DashboardResolver */
+/***/ "./src/app/resolvers/user.resolver.ts":
+/*!********************************************!*\
+  !*** ./src/app/resolvers/user.resolver.ts ***!
+  \********************************************/
+/*! exports provided: UserResolver */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DashboardResolver", function() { return DashboardResolver; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserResolver", function() { return UserResolver; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
@@ -7527,19 +7660,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var DashboardResolver = /** @class */ (function () {
-    function DashboardResolver(http, paths) {
+var UserResolver = /** @class */ (function () {
+    function UserResolver(http, paths) {
         this.http = http;
         this.paths = paths;
     }
-    DashboardResolver.prototype.resolve = function (route, state) {
+    UserResolver.prototype.resolve = function (route, state) {
         return this.http.get('http://localhost:4500/authorize/getuser', { observe: 'body' });
     };
-    DashboardResolver = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    UserResolver = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _services_paths__WEBPACK_IMPORTED_MODULE_3__["Paths"]])
-    ], DashboardResolver);
-    return DashboardResolver;
+    ], UserResolver);
+    return UserResolver;
 }());
 
 
@@ -7641,6 +7774,48 @@ var OperationHelpersService = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
     ], OperationHelpersService);
     return OperationHelpersService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/project.service.ts":
+/*!*********************************************!*\
+  !*** ./src/app/services/project.service.ts ***!
+  \*********************************************/
+/*! exports provided: ProjectService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProjectService", function() { return ProjectService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _paths__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./paths */ "./src/app/services/paths.ts");
+
+
+
+
+var ProjectService = /** @class */ (function () {
+    function ProjectService(http, paths) {
+        this.http = http;
+        this.paths = paths;
+        this.createNewProject = function (project) {
+            if (project.title !== '') {
+                console.log('creating new project');
+                this.http.post(this.paths.endPoints.createNewProject, project, { observe: 'body' }).subscribe(function (projectId) {
+                    console.log('got project id', projectId);
+                });
+            }
+        };
+    }
+    ProjectService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _paths__WEBPACK_IMPORTED_MODULE_3__["Paths"]])
+    ], ProjectService);
+    return ProjectService;
 }());
 
 

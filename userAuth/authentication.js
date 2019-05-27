@@ -89,7 +89,7 @@ const verifyTokens=async function(tokens){
 };
 
 const isAuthorized=async (req,res,next)=>{
-    console.log(`checking tokens on is valid route`,req.cookies);
+    console.log(`checking tokens on is valid route in route`,req.originalUrl,req.cookies);
     if(req.cookies.sessionid){
         
         const uid= await verifyTokens(req.cookies);
