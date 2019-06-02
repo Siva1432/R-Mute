@@ -23,8 +23,36 @@ module.exports=function(){
             ref:'users'
         }],
         projectTree:{
-            type:Map
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'rootTrees'
         }
+    });
+
+
+    const rootTreesSchema= new mongoose.Schema({
+        name:{
+            type:String,
+            minlength:1,
+            maxlength:225,
+            required:true,
+        },
+        folders:{
+            type:Map,
+        },
+        files:[{
+            name:{
+
+            },
+            type:mongoose.Schema.Types.ObjectId
+        }],
+        dateCreated:{
+            type:Date,
+            required:true
+        },
+        dateModefied:{
+            type:Date,
+        }
+
     });
     
     const Project= mongoose.model('projects',projectSchema);
@@ -37,7 +65,7 @@ module.exports=function(){
                     description:project.description,
                     admin:admin,
                     collaborations:[],
-                    projectTree:{}
+                    projectTree:new Map()
                 }).save();
                 if(await newProject){
                     console.log('new project created',newProject);

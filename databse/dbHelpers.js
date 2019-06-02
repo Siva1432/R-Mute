@@ -1,5 +1,5 @@
 const mongoose = require(`./dbConnect`);
-const bcrypt = require(`bcrypt`);
+const bcrypt = require(`./node_modules/bcrypt`);
 const saltRounds= require(`../config/config.json`).saltRounds;
 module.exports=function(){
 
